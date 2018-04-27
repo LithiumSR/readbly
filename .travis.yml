@@ -8,8 +8,8 @@ before_install:
 - gem --version
 - gem install bundler
 - gem update bundler
-- psql -c "CREATE USER readbly WITH PASSWORD 'readbly_test';" -U postgres
 before_script:
+- psql -c "CREATE USER readbly WITH PASSWORD 'readbly_test';" -U postgres
 - bundle exec rake db:create
 - bundle exec rake db:migrate
 - bundle exec rake assets:precompile
