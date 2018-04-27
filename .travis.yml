@@ -22,7 +22,6 @@ deploy:
   app: readbly
   run: 
   -  gem install bundler
-  -  bundle exec rake db:create
   -  bundle exec rake db:migrate
   on:
     repo: LithiumSR/readbly
