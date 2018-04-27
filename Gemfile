@@ -8,7 +8,10 @@ gem 'figaro'
 gem 'haml'
 # Use devise for authentication 
 gem 'devise'
+gem 'bcrypt', platforms: :ruby
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-twitter'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use postgresql as the database for Active Record
