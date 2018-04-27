@@ -1,11 +1,14 @@
 language: ruby
 cache:
 - bundler
+env:
+- READBLY_PWD=readbly_test
 before_install:
 - gem update --system
 - gem --version
 - gem install bundler
 - gem update bundler
+- psql -c "CREATE USER readbly WITH PASSWORD 'readbly_test';" -U postgres
 before_script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
