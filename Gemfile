@@ -2,8 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
-gem 'cucumber-rails', require: false
-gem 'rspec-rails', '~> 3.7'
+
 # Use figaro to handle env variable and secret keys
 gem 'figaro'
 # Use haml
@@ -49,6 +48,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Use rspec for testing
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do
@@ -62,6 +63,10 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  #cucumber for testing
+  gem 'cucumber-rails', require: false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
