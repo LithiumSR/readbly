@@ -27,3 +27,9 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore idea configuration files
+/.idea/*
+
+# Ignore rspec files
+.rspec
