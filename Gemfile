@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 gem 'cucumber-rails', require: false
-gem 'rspec'
+gem 'rspec-rails', '~> 3.7'
 # Use figaro to handle env variable and secret keys
 gem 'figaro'
 # Use haml
