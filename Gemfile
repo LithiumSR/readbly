@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
+gem 'cucumber-rails', require: false
+gem 'rspec'
 # Use figaro to handle env variable and secret keys
 gem 'figaro'
 # Use haml
