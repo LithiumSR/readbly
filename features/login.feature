@@ -1,11 +1,9 @@
 Feature: 
-    User tries to login but fails 
+    As a User
+    I want to sign in 
     
-Scenario: User signs in unsuccessfully with email and password
-    Given I am not logged in
-    And I am a user named "foo" with an email "user@test.com" and password "please"
-    When I go to the sign in page
-    And I sign in as "user@test.com/please"
-    Then I should not be signed in
-    When I return next time
-    Then I should not be already signed in
+Scenario: User signs in successfully with email and password
+    Given a valid user with email "test_sign_in@test.com" and password "test123"
+    When I go to the login page
+    And I sign in with email "test_sign_in@test.com" and password "test123"
+    Then I should see "Signed in successfully."

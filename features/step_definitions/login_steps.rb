@@ -1,27 +1,17 @@
-Given("I am not logged in") do
-  pending # Write code here that turns the phrase above into concrete actions
+Given("a valid user with email {string} and password {string}") do |string, string2|
+  User.create!({:email => string, :password => string2, :password_confirmation => string2 })
 end
 
-Given("I am a user named {string} with an email {string} and password {string}") do |string, string2, string3|
-  pending # Write code here that turns the phrase above into concrete actions
+When("I go to the login page") do
+  visit  '/users/sign_in'
 end
 
-When("I go to the sign in page") do
-  pending # Write code here that turns the phrase above into concrete actions
+When("I sign in with email {string} and password {string}") do |string, string2|
+  fill_in "Email", :with => string
+  fill_in "Password", :with => string2
+  click_button "Log in"
 end
 
-When("I sign in as {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I should not be signed in") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I return next time") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I should not be already signed in") do
-  pending # Write code here that turns the phrase above into concrete actions
+Then("I should see {string}") do |string|
+  expect(page).to have_content(string)
 end
