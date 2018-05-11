@@ -1,35 +1,10 @@
-Given("I am not logged in") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given("I am not registered") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 When("I go to the sign up page") do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit  '/users/sign_up'
 end
 
-When("I enter {string} as email") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I enter {string} as password") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I enter {string} as password confirmation") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I should be signed in") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I return next time") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I should be already registered") do
-  pending # Write code here that turns the phrase above into concrete actions
+When("I sign up with email {string} and password {string}") do |string, string2|
+  fill_in "Email", :with => string
+  fill_in "Password", :with => string2
+  fill_in "Password confirmation", :with => string2
+  click_button "Sign up"
 end
