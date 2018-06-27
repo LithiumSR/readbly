@@ -9,7 +9,6 @@ class ApiController < ApplicationController
       }
       url = "https://media-information-service.herokuapp.com/book/search"
       response = HTTParty.get(url, :query => query)
-      print(response)
       render json: response.body
   end
 end
