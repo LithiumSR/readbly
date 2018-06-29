@@ -11,4 +11,16 @@ class User < ApplicationRecord
     user.password = Devise.friendly_token[0,20]
   end
   end
+
+  def admin?
+    has_role?(:admin)
+  end
+
+  def client?
+    has_role?(:client)
+  end
+
+  def operator?
+    has_role?(:operator)
+  end
 end
