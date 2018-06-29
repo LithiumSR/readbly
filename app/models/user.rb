@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :assign_default_role
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -16,11 +17,15 @@ class User < ApplicationRecord
     has_role?(:admin)
   end
 
-  def client?
-    has_role?(:client)
+  def normal?
+    has_role?(:normal)
   end
 
   def operator?
     has_role?(:operator)
+  end
+
+  def assign_default_role
+    add_role(:normal) if self.roles.blank?
   end
 end
