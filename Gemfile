@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
+
+gem 'bootstrap-sass', '~> 3.3.6'
 # Rest client for api calls
 gem  'httparty'
 # Use figaro to handle env variable and secret keys
@@ -10,6 +12,8 @@ gem 'figaro'
 gem 'haml'
 # Use devise for authentication 
 gem 'devise'
+gem 'cancancan', '~> 1.10'
+gem 'rolify'
 gem 'bcrypt', platforms: :ruby
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
