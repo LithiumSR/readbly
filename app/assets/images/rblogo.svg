@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="162px" height="228px" viewBox="0 0 162 228" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>si-glyph-book-3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-57.7864676%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#FC4A1A" offset="0%"></stop>
+            <stop stop-color="#F7B733" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-129.000000, -128.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <g id="si-glyph-book-3" transform="translate(129.000000, 128.000000)">
+                <polygon id="Shape" points="0 197.542587 30.0403278 228 162 198.360718 162 28.0460812 147.427309 19.7068933 30.0403278 56.6949953 14.1550502 41.7677054 129.006353 8.9707271 111.883068 0 0.208820551 30.4574127"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

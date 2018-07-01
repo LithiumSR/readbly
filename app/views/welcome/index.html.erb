@@ -1,4 +1,48 @@
-<h2>Hello World</h2>
-<p>
-  The time is now: <%= Time.now %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="home">
+<p class="title">
+  <%= image_tag("rblogo.svg", :alt => "Readbly Logo", :align => "middle", :size => "142x188") %>
+  <u>Rea<b>db</b>ly</u>
 </p>
+
+<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ullamcorper sem, sit amet aliquam justo. Nulla interdum magna cursus tempus porta. Curabitur at sapien mi. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+<div class="rectangle">
+  <p class="lor">
+    Please <b>Login</b> on <b>Register</b>
+  </p>
+  <div class="button" id="register">
+    <p class="text">
+      <a href="./users/sign_up">Register</a>
+    </p>
+  </div> 
+  <div class="button" id="login">
+    <p class="text">
+      <a href="./users/sign_in">Login via Email</a>
+    </p>
+  </div> 
+  <div class="button" id="login">
+    <p class="text">
+      <a href="./users/auth/facebook">Login via Facebook</a>
+    </p>
+  </div> 
+  <div class="button" id="login">
+    <p class="text">
+    <a href="./users/auth/google_oauth2">Login via Google</a>
+    </p>
+  </div> 
+  <div class="button" id="login">
+    <p class="text">
+    <a href="./users/auth/github">Login via Github</a>
+    </p>
+  </div> 
+</div>
+  
+</body>
+</html>
