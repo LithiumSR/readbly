@@ -3,7 +3,7 @@ Given("a valid user with email {string} and password {string}") do |string, stri
 end
 
 When("I go to the login page") do
-  visit  '/users/sign_in'
+  visit  '/users/login_email'
 end
 
 When("I sign in with email {string} and password {string}") do |string, string2|
