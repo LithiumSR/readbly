@@ -1,34 +1,48 @@
-<%= flash_messages %>
-<header>
-  <h2>Log in</h2>
-</header>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="devise-container">
-    <div class="row">
-      <div class="form-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group actions">
-        <% if devise_mapping.rememberable? -%>
-          <div class="field pull-left">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </div>
-        <% end -%>
-        <div class="pull-right">
-          <%= render "devise/shared/links" %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <%= f.submit "Log in", class: "btn btn-lg btn-primary" %>
-<% end %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="home">
+<p class="title">
+  <%= image_tag("rblogo.svg", :alt => "Readbly Logo", :align => "middle", :size => "142x188") %>
+  <u>Rea<b>db</b>ly</u>
+</p>
+
+<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ullamcorper sem, sit amet aliquam justo. Nulla interdum magna cursus tempus porta. Curabitur at sapien mi. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+<div class="rectangle">
+  <p class="lor">
+    Please <b>Login</b> on <b>Register</b>
+  </p>
+  <div class="button" id="register">
+    <p class="text">
+      <a href="./sign_up">Register</a>
+    </p>
+  </div> 
+  <div class="button" id="login">
+    <p class="text">
+      <a href="./login_email">Login via Email</a>
+    </p>
+  </div> 
+  <div class="button" id="login">
+    <p class="text">
+      <a href="./auth/facebook">Login via Facebook</a>
+    </p>
+  </div> 
+  <div class="button" id="login">
+    <p class="text">
+    <a href="./auth/google_oauth2">Login via Google</a>
+    </p>
+  </div> 
+  <div class="button" id="login">
+    <p class="text">
+    <a href="./auth/github">Login via Github</a>
+    </p>
+  </div> 
+</div>
+  
+</body>
+</html>
