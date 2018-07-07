@@ -1,0 +1,26 @@
+<script src="/assets/manage_users/manage_users.js"></script>
+
+<body onload="load();">
+<h1>Manage Users</h1>
+<% @users = User.all %>
+<table style="width:100%">
+  <tr>
+    <th>Email</th>
+    <th>Type</th>
+    <th>Role</th>
+    <th>Change role</th>
+    </tr>
+<% @users.each do |user| %>
+    <td><%= user.email %></td>
+    <td><span class="name"><%= user.username%></span></td>
+    <td><%= getRole(user) %></td>
+    <td>
+      <%= form_for :changes, :url => {:action => "change_role",:id => user.email, :method => :put} do |f|%>
+        <%= f.select :role, options_for_select(User::ROLES) ,{}, { :class => 'select' }  %>
+        <%= f.submit "Change",  :disable_with => "Changing...", :class => 'change' %>
+      <% end %>
+    </td>
+    </tr>
+  <% end %>
+</table>
+</body>
