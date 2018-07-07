@@ -13,37 +13,38 @@
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, id: 'autocomplete' %>
   </div>
 
   <div class="field">
     <%= form.label :author %>
-    <%= form.text_field :author %>
+    <%= form.text_field :author, id: 'author' %>
   </div>
 
   <div class="field">
     <%= form.label :publisher %>
-    <%= form.text_field :publisher %>
+    <%= form.text_field :publisher, id: 'publisher' %>
   </div>
 
   <div class="field">
     <%= form.label :overview %>
-    <%= form.text_field :overview %>
+    <%= form.text_field :overview, id: 'overview' %>
   </div>
 
   <div class="field">
     <%= form.label :isbn %>
-    <%= form.text_field :isbn %>
+    <%= form.text_field :isbn, id: 'isbn' %>
   </div>
+
 
   <div class="field">
     <%= form.label :released_at %>
-    <%= form.date_select :released_at %>
+    <%= form.number_field :released_at, min: 0,  id: 'release_at' %>
   </div>
 
   <div class="field">
     <%= form.label :coverlink %>
-    <%= form.text_field :coverlink %>
+    <%= form.text_field :coverlink, id: 'coverlink' %>
   </div>
 
   <div class="actions">
