@@ -1,5 +1,5 @@
 class ManagementController < ApplicationController
-  #before_action :isEnabled
+  before_action :isEnabled
   def manage_users
 
   end
