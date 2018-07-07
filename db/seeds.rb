@@ -17,7 +17,7 @@ user2 = User.create(username: 'Bruce',
                     email: 'client@gmail.com',
                     password: 'password1234',
                     password_confirmation: 'password1234')
-user2.add_role(:normal)
+user2.add_role(:user)
 user3 = User.create(username: 'Leo',
                     email: 'operator@gmail.com',
                     password: 'password1234',

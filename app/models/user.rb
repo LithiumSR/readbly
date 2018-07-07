@@ -19,8 +19,8 @@ class User < ApplicationRecord
     has_role?(:admin)
   end
 
-  def normal?
-    has_role?(:normal)
+  def user?
+    has_role?(:user)
   end
 
   def operator?
@@ -28,6 +28,6 @@ class User < ApplicationRecord
   end
 
   def assign_default_role
-    add_role(:normal) if self.roles.blank?
+    add_role(:user) if self.roles.blank?
   end
 end

@@ -49,8 +49,14 @@ class ManagementController < ApplicationController
   end
 
   def isEnabled
-    if !current_user.has_role? :admin
-      redirect_to root_path alert: "User not enabled to manage users"
+    if user_signed_in?
+      user = current_user
+      if !user.has_role? :admin
+        redirect_to root_path alert: "User not enabled to manage users"
+      end
+    else
+      redirect_to root_path
     end
+
   end
 end

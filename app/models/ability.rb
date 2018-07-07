@@ -7,13 +7,15 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
       can :read, :all
-    elsif (user.has_role? :operator)
+      end
+    if user.has_role? :operator
       can :read, Book
       can :manage, Book
       #can :manage, Reservation
       #can :read, Reservation
-    elsif(user.has_role? :user)
-      can :read,Book
+      end
+    if user.has_role? :user
+      can :read, Book
       #can :manage, Reservation, user_id: user.username
       #can :read, Reservation
     end
