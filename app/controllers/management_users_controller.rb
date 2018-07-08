@@ -1,4 +1,4 @@
-class ManagementController < ApplicationController
+class ManagementUsersController < ApplicationController
   before_action :isEnabled
   def manage_users
 

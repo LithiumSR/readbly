@@ -1,4 +1,4 @@
-module ManagementHelper
+module ManagementUsersHelper
   def isAdmin(user)
     if user.has_role? :admin
       return true
@@ -19,6 +19,6 @@ module ManagementHelper
     elsif user.has_role? :operator
       return 'Operator'
     end
-    else return 'User'
+  else return 'User'
   end
 end
