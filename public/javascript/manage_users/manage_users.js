@@ -1,4 +1,4 @@
-function load(){
+function manageUsersLoad(){
     let names = document.getElementsByClassName("name");
     let change_buttons = document.getElementsByClassName("change");
     let select = document.getElementsByClassName("select");
