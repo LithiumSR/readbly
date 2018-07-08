@@ -10,8 +10,7 @@
       <th>Publisher</th>
       <th>Overview</th>
       <th>Isbn</th>
-      <th>Created at</th>
-      <th>Released at</th>
+      <th>Release year</th>
       <th>Coverlink</th>
       <th colspan="3"></th>
     </tr>
@@ -27,9 +26,11 @@
         <td><%= book.isbn %></td>
         <td><%= book.released_at %></td>
         <td><%= book.coverlink %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if canManage(current_user) %>
+          <td><%= link_to 'Show', book %></td>
+          <td><%= link_to 'Edit', edit_book_path(book) %></td>
+          <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
