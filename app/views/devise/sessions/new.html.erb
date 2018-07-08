@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html>
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= yield :meta %>
+  <meta name="robots" content="index,follow">
+  <title><%= yield :title %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/welcome.css">
+    <%= csrf_meta_tags %>
 </head>
+
 <body class="home">
 <p class="title">
   <%= image_tag("rblogo.svg", :alt => "Readbly Logo", :align => "middle", :size => "142x188") %>
@@ -19,30 +21,29 @@
   </p>
   <div class="button" id="register">
     <p class="text">
-      <a href="./sign_up">Register</a>
+      <a id="profile" href="./sign_up">Register</a>
     </p>
   </div> 
   <div class="button" id="login">
     <p class="text">
-      <a href="./login_email">Login via Email</a>
+      <a id="profile" href="./login_email">Login via Email</a>
     </p>
   </div> 
   <div class="button" id="login">
     <p class="text">
-      <a href="./auth/facebook">Login via Facebook</a>
+      <a id="profile" href="./auth/facebook">Login via Facebook</a>
     </p>
   </div> 
   <div class="button" id="login">
     <p class="text">
-    <a href="./auth/google_oauth2">Login via Google</a>
+    <a id="profile" href="./auth/google_oauth2">Login via Google</a>
     </p>
   </div> 
   <div class="button" id="login">
     <p class="text">
-    <a href="./auth/github">Login via Github</a>
+    <a id="profile" href="./auth/github">Login via Github</a>
     </p>
   </div> 
 </div>
   
 </body>
-</html>
