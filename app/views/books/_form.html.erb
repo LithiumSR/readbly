@@ -1,4 +1,4 @@
-<script src="/javascript/lib/kotlin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/kotlin@1.2.51/kotlin.min.js"></script>
 <script src="/javascript/books/bookinfo_kotlin.js"></script>
 
 <%= form_with(model: book, local: true) do |form| %>
@@ -35,7 +35,7 @@
 
   <div class="field">
     <%= form.label :isbn %>
-    <%= form.text_field :isbn, id: 'isbn', onkeydown: 'keyDown()', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57;', maxlength: 13%>
+    <%= form.text_field :isbn, id: 'isbn', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57;', maxlength: 13%>
     <button type="button" id="getinfo" onclick=""> Autocomplete </button>
   </div>
 
