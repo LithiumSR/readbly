@@ -15,4 +15,44 @@ module ApplicationHelper
     end
     nil
   end
+
+  def isAdmin(user)
+    if user.has_role? :admin
+      return true
+    end
+    return false
+  end
+
+  def isOperator(user)
+    if user.has_role? :operator
+      return true
+    end
+    return false
+  end
+
+  def isUser(user)
+    if user.has_role? :user
+      return true
+    end
+    return false
+  end
+
+  def hasValidRole(user)
+    if(!isUser(user) and !isOperator(user) and !isAdmin(user))
+      return false
+    end
+    return true
+  end
+
+  def getRole(user)
+    if isAdmin(user)
+      return 'Admin'
+    elsif isOperator(user)
+      return 'Operator'
+    elsif isUser(user)
+      return 'User'
+    end
+    return 'Unrecognized'
+  end
+
 end

@@ -26,7 +26,7 @@
         <td><%= book.isbn %></td>
         <td><%= book.released_at %></td>
         <td><%= book.coverlink %></td>
-        <% if canManage(current_user) %>
+        <% if canManageBooks(current_user) %>
           <td><%= link_to 'Show', book %></td>
           <td><%= link_to 'Edit', edit_book_path(book) %></td>
           <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
