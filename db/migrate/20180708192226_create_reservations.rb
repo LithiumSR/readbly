@@ -4,9 +4,8 @@ class CreateReservations < ActiveRecord::Migration[5.2]
       t.date :request_date
       t.date :expiration_date
       t.string :isReturned
-      t.string :boolean
-      t.string :isLoan
-      t.string :boolean
+      t.boolean :isLoan
+      t.boolean :isReturned
 
       t.timestamps
     end

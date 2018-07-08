@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2018_07_08_192347) do
     t.date "expiration_date"
     t.string "isReturned"
     t.string "boolean"
-    t.string "isLoadn"
+    t.string "isLoan"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
