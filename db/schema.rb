@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_07_214658) do
+ActiveRecord::Schema.define(version: 2018_07_08_192347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 2018_07_07_214658) do
     t.string "coverlink"
     t.datetime "updated_at", null: false
     t.integer "released_at"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.date "request_date"
+    t.date "expiration_date"
+    t.string "isReturned"
+    t.string "boolean"
+    t.string "isLoadn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.index ["book_id"], name: "index_reservations_on_book_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -67,4 +81,6 @@ ActiveRecord::Schema.define(version: 2018_07_07_214658) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "reservations", "books"
+  add_foreign_key "reservations", "users"
 end
