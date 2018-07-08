@@ -81,14 +81,17 @@ var bookinfo_kotlin = function (_, Kotlin) {
       var tmp$;
       var isbn = Kotlin.isType(tmp$ = document.getElementById('isbn'), HTMLInputElement) ? tmp$ : throwCCE();
       closure$button.disabled = true;
+      var tmp = closure$button.innerText;
+      closure$button.innerText = 'Searching...';
       var $receiver = isbn.value;
       var tmp$_0;
       var value = trim(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE()).toString();
       if (!equals(value, '') && (value.length === 10 || value.length === 13))
-        getInfos(value);
+        getInfos(value, tmp);
       else {
         window.alert('Invalid ISBN');
         closure$button.disabled = false;
+        closure$button.innerText = tmp;
       }
       return Unit;
     };
@@ -108,7 +111,7 @@ var bookinfo_kotlin = function (_, Kotlin) {
     var year = substringBefore(releaseDate, '-');
     return new Book(typeof (tmp$ = data['title']) === 'string' ? tmp$ : throwCCE(), typeof (tmp$_0 = data['author']) === 'string' ? tmp$_0 : throwCCE(), typeof (tmp$_1 = data['linkImage']) === 'string' ? tmp$_1 : throwCCE(), typeof (tmp$_2 = data['publisher']) === 'string' ? tmp$_2 : throwCCE(), typeof (tmp$_3 = data['overview']) === 'string' ? tmp$_3 : throwCCE(), toInt(year));
   }
-  function getInfos$lambda(closure$req, closure$button) {
+  function getInfos$lambda(closure$req, closure$button, closure$text_button) {
     return function () {
       if (closure$req.v.readyState == 4 && closure$req.v.status == 200) {
         try {
@@ -118,22 +121,24 @@ var bookinfo_kotlin = function (_, Kotlin) {
           var book = createBook(data);
           book.updateView();
           closure$button.disabled = false;
+          closure$button.innerText = closure$text_button;
         }
          catch (e) {
           console.log(e);
           closure$button.disabled = false;
+          closure$button.innerText = closure$text_button;
         }
       }
     };
   }
-  function getInfos(isbn) {
+  function getInfos(isbn, text_button) {
     var tmp$;
     var req = {v: new XMLHttpRequest()};
     var button = Kotlin.isType(tmp$ = document.getElementById('getinfo'), HTMLButtonElement) ? tmp$ : throwCCE();
     var home = window.location.hostname;
     if (equals(home, '127.0.0.1'))
       home = 'http://' + home + ':3000';
-    req.v.onreadystatechange = getInfos$lambda(req, button);
+    req.v.onreadystatechange = getInfos$lambda(req, button, text_button);
     console.log('Book request @: ' + home + '/book_api/?isbn=' + isbn + '&max_result=1');
     req.v.open('GET', home + '/book_api/?isbn=' + isbn + '&max_result=1', true);
     req.v.send();
@@ -141,7 +146,7 @@ var bookinfo_kotlin = function (_, Kotlin) {
   _.Book = Book;
   _.main_kand9s$ = main;
   _.createBook_qk3xy8$ = createBook;
-  _.getInfos_61zpoe$ = getInfos;
+  _.getInfos_puj7f4$ = getInfos;
   main([]);
   Kotlin.defineModule('bookinfo_kotlin', _);
   return _;
