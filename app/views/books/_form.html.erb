@@ -1,8 +1,10 @@
+<script src="/javascript/lib/kotlin.js"></script>
+<script src="/javascript/books/bookinfo_kotlin.js"></script>
+
 <%= form_with(model: book, local: true) do |form| %>
   <% if book.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
       <ul>
       <% book.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,7 +15,7 @@
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title, id: 'autocomplete' %>
+    <%= form.text_field :title, id: 'title' %>
   </div>
 
   <div class="field">
@@ -33,13 +35,14 @@
 
   <div class="field">
     <%= form.label :isbn %>
-    <%= form.text_field :isbn, id: 'isbn' %>
+    <%= form.text_field :isbn, id: 'isbn', onkeydown: 'keyDown()', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57;', maxlength: 13%>
+    <button type="button" id="getinfo" onclick="" disabled="true"> Autocomplete </button>
   </div>
 
 
   <div class="field">
     <%= form.label :released_at %>
-    <%= form.number_field :released_at, min: 0,  id: 'release_at' %>
+    <%= form.number_field :released_at, min: 0,  id: 'released_at' %>
   </div>
 
   <div class="field">
