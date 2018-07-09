@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'will_paginate', '~> 3.1.0'
 gem 'table_print'
 gem 'webpack', require: false
 gem 'bootstrap-sass', '~> 3.3.6'
