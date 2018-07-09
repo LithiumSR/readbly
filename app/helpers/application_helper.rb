@@ -91,9 +91,8 @@ module ApplicationHelper
     end
   end
 
-  def self.canManageUsers
-    if user_signed_in?
-      user = current_user
+  def self.canManageUsers(user)
+    if user!=nil
       if !user.has_role? :admin
         redirect_to root_path alert: "User not enabled to manage users"
       end
