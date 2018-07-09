@@ -8,10 +8,13 @@ class ReservationsController < ApplicationController
     reservation = Reservation.find(params[:id])
     if reservation!=nil and ApplicationHelper.isAdmin(current_user)
       reservation.delete
-      redirect_to '/manage_reservations' and return
+      redirect_back fallback_location: root_path and return
+    elsif reservation!=nil and !reservation.isLoan and ApplicationHelper.hasValidRole(current_user)
+      reservation.delete
+      redirect_back fallback_location: root_path and return
     elsif !ApplicationHelper.isAdmin(current_user)
-           redirect_to '/manage_reservations', alert: 'You have no authorization to delete a reservation' and return
-    else redirect_to '/manage_reservations', alert: 'Error when deleting a reservation' and return
+           redirect_to root_path, alert: 'You have no authorization to delete a reservation' and return
+    else redirect_back fallback_location: root_path, alert: 'Error when deleting a reservation' and return
     end
 
   end
@@ -58,6 +61,12 @@ class ReservationsController < ApplicationController
   end
 
   def canManage
-    ApplicationHelper.canManageReservations(current_user)
+    if current_user!=nil
+      if !current_user.has_role? :admin and !current_user.has_role? :operator
+        redirect_to root_path alert: "User not enabled to manage reservations"
+      end
+    else
+      redirect_to root_path
+    end
   end
 end

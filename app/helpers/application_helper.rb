@@ -58,13 +58,6 @@ module ApplicationHelper
     return false
   end
 
-  def hasValidRole(user)
-    if(!isUser(user) and !isOperator(user) and !isAdmin(user))
-      return false
-    end
-    return true
-  end
-
   def self.hasValidRole(user)
     if(!isUser(user) and !isOperator(user) and !isAdmin(user))
       return false
