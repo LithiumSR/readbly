@@ -35,5 +35,10 @@
   <%= @book.coverlink %>
 </p>
 
+<% if isOperator(current_user) or isAdmin(current_user) %>
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
+<% end %>
+<% if isAdmin(current_user) %>
+  <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
