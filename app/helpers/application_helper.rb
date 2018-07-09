@@ -60,4 +60,25 @@ module ApplicationHelper
     return user.email
   end
 
+  def self.canManageReservations
+    if user_signed_in?
+      user = current_user
+      if !user.has_role? :admin and !user.has_role? :operator
+        redirect_to root_path alert: "User not enabled to manage reservations"
+      end
+    else
+      redirect_to root_path
+    end
+  end
+
+  def self.canManageUsers
+    if user_signed_in?
+      user = current_user
+      if !user.has_role? :admin
+        redirect_to root_path alert: "User not enabled to manage users"
+      end
+    else
+      redirect_to root_path
+    end
+  end
 end
