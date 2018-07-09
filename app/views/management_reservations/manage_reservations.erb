@@ -91,7 +91,7 @@
         <td><%= reservation.isPostponed %></td>
         <td><%= button_to 'Postpone Return', postpone_return_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
         <td><%= button_to 'Confirm Return', confirm_return_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
-        <% if isAdmin(current_user) and current_user!=nil %>
+        <% if isAdmin(current_user) %>
           <td><%= button_to 'Delete reservation', delete_reservation_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
         <% end %>
         </tr>
@@ -122,7 +122,7 @@
         <td><%= reservation.expiration_date %></td>
         <td><%= reservation.returned_date %></td>
         <td><%= reservation.isPostponed %></td>
-        <% if isAdmin(current_user) and current_user!=nil %>
+        <% if isAdmin(current_user)%>
           <td><%= button_to 'Delete reservation', delete_reservation_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
         <% end %>
         </tr>
