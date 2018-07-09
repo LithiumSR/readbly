@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_09_144050) do
+ActiveRecord::Schema.define(version: 2018_07_09_145647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_07_09_144050) do
     t.bigint "user_id"
     t.bigint "book_id"
     t.boolean "isPostponed"
-    t.date "returned_at"
+    t.date "returned_date"
     t.index ["book_id"], name: "index_reservations_on_book_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end

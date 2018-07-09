@@ -23,7 +23,21 @@ module ApplicationHelper
     return false
   end
 
+  def self.isAdmin(user)
+    if user.has_role? :admin
+      return true
+    end
+    return false
+  end
+
   def isOperator(user)
+    if user.has_role? :operator
+      return true
+    end
+    return false
+  end
+
+  def self.isOperator(user)
     if user.has_role? :operator
       return true
     end

@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   put '/manage_users/demote', to: 'management_users#demote', as: 'demote'
   post '/manage_users/change_role', to: 'management_users#change_role', as:'change_role'
   get '/manage_reservations', to: 'management_reservations#manage_reservations'
-  put '/loan/confirm_loan', to: 'reservations#confirm_loan', as: 'confirm_loan'
-  put '/loan/postpone_return', to: 'reservations#postpone_return', as: 'postpone_return'
-  put '/loan/confirm_return', to: 'reservations#confirm_return', as: 'confirm_return'
+  put '/reservation/confirm_loan', to: 'reservations#confirm_loan', as: 'confirm_loan'
+  put '/reservation/postpone_return', to: 'reservations#postpone_return', as: 'postpone_return'
+  put '/reservation/confirm_return', to: 'reservations#confirm_return', as: 'confirm_return'
+  delete '/reservation/delete', to: 'reservations#delete', as: 'delete_reservation'
   devise_scope :user do
     get '/users/login_email', to: 'login#login_email'
   end

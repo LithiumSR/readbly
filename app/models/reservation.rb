@@ -9,4 +9,5 @@ class Reservation < ApplicationRecord
     self.isPostponed = false
     self.request_date = DateTime.now
   end
+
 end
