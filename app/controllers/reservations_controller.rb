@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
     if reservation!=nil and ApplicationHelper.isAdmin(current_user)
       reservation.delete
       redirect_back fallback_location: root_path and return
-    elsif reservation!=nil and !reservation.isLoan and ApplicationHelper.hasValidRole(current_user)
+    elsif reservation!=nil and !reservation.isLoan and (ApplicationHelper.isOperator(current_user) or (ApplicationHelper.isUser(current_user) and reservation.user_id == current_user.id))
       reservation.delete
       redirect_back fallback_location: root_path and return
     elsif !ApplicationHelper.isAdmin(current_user)

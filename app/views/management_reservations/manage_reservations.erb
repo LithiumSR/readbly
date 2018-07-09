@@ -1,4 +1,3 @@
-
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -7,157 +6,199 @@
   <script src="/javascript/manage_users/manage_users.js"></script>
   <link rel="stylesheet" type="text/css" href="/stylesheets/reservations.css">
   <script>
-
-      function onLoad(){
-          var i, tabcontent, tablinks;
-
-          // Get all elements with class="tabcontent" and hide them
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-              tabcontent[i].style.display = "none";
-          }
-
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-              tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          var ls = localStorage.getItem("last_tab")
-          if (ls!=null){
-              document.getElementById(ls).style.display = "block";
-              for (i = 0; i < tablinks.length; i++) {
-                  if (tablinks[i].value == ls){
-                      tablinks[i].className += " active";
-                      break;
-                  }
-              }
-          }
+    function onLoad() {
+      var i, tabcontent, tablinks;
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
 
       }
-      function openTab(evt, name) {
-          // Declare all variables
-          var i, tabcontent, tablinks;
 
-          // Get all elements with class="tabcontent" and hide them
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-              tabcontent[i].style.display = "none";
-
-          }
-
-          // Get all elements with class="tablinks" and remove the class "active"
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-              tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          localStorage.setItem("last_tab",name.toLowerCase());
-          // Show the current tab, and add an "active" class to the button that opened the tab
-          document.getElementById(name).style.display = "block";
-          evt.currentTarget.className += " active";
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
       }
+      var ls = localStorage.getItem("last_tab")
+      if (ls != null) {
+        document.getElementById(ls).style.display = "block";
+        for (i = 0; i < tablinks.length; i++) {
+          if (tablinks[i].value == ls) {
+            tablinks[i].className += " active";
+            break;
+          }
+        }
+      }
+
+    }
+
+    function openTab(evt, name) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      localStorage.setItem("last_tab", name.toLowerCase());
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(name).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
   </script>
 </head>
 
-<p id="notice"><%= notice %></p>
+<p id="notice">
+  <%= notice %>
+</p>
 
 <body onload="onLoad();">
-<div class="container">
-  <h1>Manage Reservations/Loans</h1>
+  <div class="container">
+    <h1>Manage Reservations/Loans</h1>
 
-  <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'pending')" value="pending">Pending</button>
-    <button class="tablinks" onclick="openTab(event, 'active')" value="active">Active</button>
-    <button class="tablinks" onclick="openTab(event, 'complete')" value="complete">Complete</button>
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'pending')" value="pending">Pending</button>
+      <button class="tablinks" onclick="openTab(event, 'active')" value="active">Active</button>
+      <button class="tablinks" onclick="openTab(event, 'complete')" value="complete">Complete</button>
+    </div>
+
+    <div id="pending" class="tabcontent">
+      <h2> Pending reservations:</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pending_reservations.each do |reservation| %>
+            <td>
+              <%= getEmailById(reservation.user_id)%>
+            </td>
+            <td>
+              <%= link_to  getBookById(reservation.book_id).title, getBookById(reservation.book_id) %>
+            </td>
+            <td>
+              <%= reservation.request_date %>
+            </td>
+            <td>
+              <%= button_to 'Confirm Loan', confirm_loan_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %>
+            </td>
+            <% if ApplicationHelper.hasValidRole(current_user) %>
+              <td>
+                <%= button_to 'Delete reservation', delete_reservation_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %>
+              </td>
+              <% end %>
+                </tr>
+                <% end %>
+        </tbody>
+        <%= will_paginate @pending_reservations %>
+
+      </table>
+    </div>
+
+
+    <div id="active" class="tabcontent">
+      <h2> Active reservations:</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Book</th>
+            <th>Created at</th>
+            <th>Expire at</th>
+            <th>Postponed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @active_reservations.each do |reservation| %>
+            <td>
+              <%= getEmailById(reservation.user_id)%>
+            </td>
+            <td>
+              <%= link_to  getBookById(reservation.book_id).title, getBookById(reservation.book_id) %>
+            </td>
+            <td>
+              <%= reservation.request_date %>
+            </td>
+            <td>
+              <%= reservation.expiration_date %>
+            </td>
+            <td>
+              <%= reservation.isPostponed %>
+            </td>
+            <td>
+              <%= button_to 'Postpone Return', postpone_return_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %>
+            </td>
+            <td>
+              <%= button_to 'Confirm Return', confirm_return_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %>
+            </td>
+            <% if isAdmin(current_user) %>
+              <td>
+                <%= button_to 'Delete reservation', delete_reservation_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %>
+              </td>
+              <% end %>
+                </tr>
+                <% end %>
+        </tbody>
+        <%= will_paginate @active_reservations %>
+      </table>
+    </div>
+
+    <div id="complete" class="tabcontent">
+      <h2> Complete reservations:</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Book</th>
+            <th>Created at</th>
+            <th>Expire at</th>
+            <th>Returned at</th>
+            <th>Postponed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @completed_reservations.each do |reservation| %>
+            <td>
+              <%= getEmailById(reservation.user_id)%>
+            </td>
+            <td>
+              <%= link_to  getBookById(reservation.book_id).title, getBookById(reservation.book_id) %>
+            </td>
+            <td>
+              <%= reservation.request_date %>
+            </td>
+            <td>
+              <%= reservation.expiration_date %>
+            </td>
+            <td>
+              <%= reservation.returned_date %>
+            </td>
+            <td>
+              <%= reservation.isPostponed %>
+            </td>
+            <% if isAdmin(current_user)%>
+              <td>
+                <%= button_to 'Delete reservation', delete_reservation_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %>
+              </td>
+              <% end %>
+                </tr>
+                <% end %>
+        </tbody>
+        <%= will_paginate @completed_reservations %>
+      </table>
+    </div>
+
   </div>
-
-  <div id="pending" class="tabcontent">
-    <h2> Pending reservations:</h2>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Created at</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @pending_reservations.each do |reservation| %>
-        <td><%= getEmailById(reservation.user_id)%></td>
-        <td><%= link_to  getBookById(reservation.book_id).title, getBookById(reservation.book_id) %></td>
-        <td><%= reservation.request_date %></td>
-        <td><%= button_to 'Confirm Loan', confirm_loan_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
-        <% if ApplicationHelper.hasValidRole(current_user) %>
-          <td><%= button_to 'Delete reservation', delete_reservation_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
-        <% end %>
-        </tr>
-      <% end %>
-      </tbody>
-      <%= will_paginate @pending_reservations %>
-
-    </table>
-  </div>
-
-
-  <div id="active" class="tabcontent">
-    <h2> Active reservations:</h2>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th>Email</th>
-        <th>Book</th>
-        <th>Created at</th>
-        <th>Expire at</th>
-        <th>Postponed</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @active_reservations.each do |reservation| %>
-        <td><%= getEmailById(reservation.user_id)%></td>
-        <td><%= link_to  getBookById(reservation.book_id).title, getBookById(reservation.book_id) %></td>
-        <td><%= reservation.request_date %></td>
-        <td><%= reservation.expiration_date %></td>
-        <td><%= reservation.isPostponed %></td>
-        <td><%= button_to 'Postpone Return', postpone_return_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
-        <td><%= button_to 'Confirm Return', confirm_return_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
-        <% if isAdmin(current_user) %>
-          <td><%= button_to 'Delete reservation', delete_reservation_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
-        <% end %>
-        </tr>
-      <% end %>
-      </tbody>
-      <%= will_paginate @active_reservations %>
-    </table>
-  </div>
-
-  <div id="complete" class="tabcontent">
-    <h2> Complete reservations:</h2>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th>Email</th>
-        <th>Book</th>
-        <th>Created at</th>
-        <th>Expire at</th>
-        <th>Returned at</th>
-        <th>Postponed</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @completed_reservations.each do |reservation| %>
-        <td><%= getEmailById(reservation.user_id)%></td>
-        <td><%= link_to  getBookById(reservation.book_id).title, getBookById(reservation.book_id) %></td>
-        <td><%= reservation.request_date %></td>
-        <td><%= reservation.expiration_date %></td>
-        <td><%= reservation.returned_date %></td>
-        <td><%= reservation.isPostponed %></td>
-        <% if isAdmin(current_user)%>
-          <td><%= button_to 'Delete reservation', delete_reservation_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
-        <% end %>
-        </tr>
-      <% end %>
-      </tbody>
-      <%= will_paginate @completed_reservations %>
-    </table>
-  </div>
-
-</div>
 </body>
