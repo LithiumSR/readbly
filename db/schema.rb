@@ -29,9 +29,8 @@ ActiveRecord::Schema.define(version: 2018_07_08_192347) do
   create_table "reservations", force: :cascade do |t|
     t.date "request_date"
     t.date "expiration_date"
-    t.string "isReturned"
-    t.string "boolean"
-    t.string "isLoan"
+    t.boolean "isReturned"
+    t.boolean "isLoan"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -65,12 +64,10 @@ ActiveRecord::Schema.define(version: 2018_07_08_192347) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
-    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid"], name: "index_users_on_uid"
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

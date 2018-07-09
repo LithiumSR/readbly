@@ -1,18 +1,34 @@
-<script src="/javascript/manage_users/manage_users.js"></script>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="/javascript/manage_users/manage_users.js"></script>
+</head>
+
+<p id="notice"><%= notice %></p>
+
 <body onload="manageUsersLoad();">
+<div class="container">
 <h1>Manage Users</h1>
-<% @users = User.all %>
-<table style="width:100%">
+<table class="table table-hover">
+  <thead>
   <tr>
     <th>Email</th>
-    <th>Type</th>
     <th>Role</th>
-    <th>Change role</th>
+    <th>Created at</th>
+    <th>Last sign in</th>
+    <th>Last IP</th>
     </tr>
+  </thead>
+  <tbody>
 <% @users.each do |user| %>
     <td><%= user.email %></td>
-    <td><span class="name"><%= user.username%></span></td>
     <td><%= getRole(user) %></td>
+    <td><%= user.created_at %></td>
+    <td><%= user.last_sign_in_at %></td>
+    <td><%= user.last_sign_in_ip %></td>
     <td>
       <%= form_for :changes, :url => {:action => "change_role",:id => user.email, :method => :put} do |f|%>
         <%= f.select :role, options_for_select(User::ROLES) ,{}, { :class => 'select' }  %>
@@ -21,5 +37,8 @@
     </td>
     </tr>
   <% end %>
+  </tbody>
+  <%= will_paginate @users %>
 </table>
+</div>
 </body>

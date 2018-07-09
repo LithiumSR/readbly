@@ -84,7 +84,7 @@ production:
   <<: *default
   database: readbly_production
   username: readbly
-  password: <%= ENV['READBLY_DATABASE_PASSWORD'] %>
+  password: <%= ENV['READBLY_PWD'] %>
 
 cucumber:
   <<: *test

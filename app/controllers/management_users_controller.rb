@@ -1,7 +1,7 @@
 class ManagementUsersController < ApplicationController
   before_action :isEnabled
   def manage_users
-
+    @users = User.all.paginate(page: params[:page], per_page: 15)
   end
 
   def change_role
