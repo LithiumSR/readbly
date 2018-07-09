@@ -49,6 +49,6 @@ class ManagementUsersController < ApplicationController
   end
 
   def canManage
-    ApplicationHelper.canManageUsers
+    ApplicationHelper.canManageUsers(current_user)
   end
 end

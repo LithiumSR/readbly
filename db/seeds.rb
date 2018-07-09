@@ -8,9 +8,6 @@
 #
 Role.create(name: :admin)
 Role.create(name: :client)
-Reservation.delete_all
-User.delete_all
-Book.delete_all
 user1 = User.create!(email: 'admin@gmail.com',
                     password: 'password1234',
                     password_confirmation: 'password1234')
