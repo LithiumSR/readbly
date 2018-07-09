@@ -8,6 +8,7 @@ class Reservation < ApplicationRecord
     self.isLoan = false
     self.isPostponed = false
     self.request_date = DateTime.now
+    self.postpone_counter = 0
   end
 
 end

@@ -42,7 +42,8 @@ class ReservationsController < ApplicationController
   end
 
   def postpone_return
-    if !user_signed_in? redirect_to root_path and return
+    if !user_signed_in?
+      redirect_to root_path and return
     end
     reservation = Reservation.find(params[:id])
     if reservation !=nil and reservation.isLoan
@@ -52,7 +53,11 @@ class ReservationsController < ApplicationController
       if ApplicationHelper.isUser(current_user) and reservation.isPostponed
         redirect_to '/manage_reservations',alert: "You can't postpone this reservation again!..." and return
       end
+      if ApplicationHelper.isOperator(current_user) and reservation.isPostponed and reservation.postpone_counter>3
+        redirect_to '/manage_reservations',alert: "You can't postpone this reservation more than 3 times!..." and return
+      end
       reservation.isPostponed=true
+      reservation.postpone_counter+=1
       reservation.expiration_date += 1.month
       reservation.save
       redirect_to '/manage_reservations' and return
