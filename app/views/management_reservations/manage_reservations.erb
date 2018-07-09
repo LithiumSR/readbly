@@ -5,7 +5,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
   <script src="/javascript/manage_users/manage_users.js"></script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/reservations.css">
   <script>
+
+      function onLoad(){
+          var i, tabcontent, tablinks;
+
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+          }
+
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          var ls = localStorage.getItem("last_tab")
+          alert(ls);
+          if (ls!=null){
+              document.getElementById(ls).style.display = "block";
+              for (i = 0; i < tablinks.length; i++) {
+                  if (tablinks[i].value == ls){
+                      tablinks[i].className += " active";
+                      break;
+                  }
+              }
+          }
+
+      }
       function openTab(evt, name) {
           // Declare all variables
           var i, tabcontent, tablinks;
@@ -22,7 +50,7 @@
           for (i = 0; i < tablinks.length; i++) {
               tablinks[i].className = tablinks[i].className.replace(" active", "");
           }
-
+          localStorage.setItem("last_tab",name.toLowerCase());
           // Show the current tab, and add an "active" class to the button that opened the tab
           document.getElementById(name).style.display = "block";
           evt.currentTarget.className += " active";
@@ -32,17 +60,17 @@
 
 <p id="notice"><%= notice %></p>
 
-<body onload="openTab();">
+<body onload="onLoad();">
 <div class="container">
-<h1>Manage Pending Reservations</h1>
+  <h1>Manage Reservations</h1>
 
   <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'Pending')">Pending</button>
-    <button class="tablinks" onclick="openTab(event, 'Active')">Active</button>
-    <button class="tablinks" onclick="openTab(event, 'Complete')">Complete</button>
+    <button class="tablinks" onclick="openTab(event, 'pending')" value="pending">Pending</button>
+    <button class="tablinks" onclick="openTab(event, 'active')" value="active">Active</button>
+    <button class="tablinks" onclick="openTab(event, 'complete')" value="complete">Complete</button>
   </div>
 
-  <div id="Pending" class="tabcontent">
+  <div id="pending" class="tabcontent">
     <h2> Pending reservations:</h2>
     <table class="table table-hover">
       <thead>
@@ -70,7 +98,7 @@
   </div>
 
 
-  <div id="Active" class="tabcontent">
+  <div id="active" class="tabcontent">
     <h2> Active reservations:</h2>
     <table class="table table-hover">
       <thead>
@@ -101,7 +129,7 @@
     </table>
   </div>
 
-  <div id="Complete" class="tabcontent">
+  <div id="complete" class="tabcontent">
     <h2> Complete reservations:</h2>
     <table class="table table-hover">
       <thead>
