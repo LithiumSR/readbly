@@ -1,8 +1,10 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= yield :meta %>
-  <meta name="robots" content="index,follow">
-  <title><%= yield :title %></title>
+    <meta name="robots" content="index,follow">
+    <title>
+      <%= yield :title %>
+    </title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
     <script type="text/javascript" src="javascript/home/app_min.js"></script>
@@ -11,40 +13,47 @@
 
 <p class="navbar2-text pull-right">
   <% if user_signed_in? %>
-    <p class="email"><%= current_user.email%></p>
-     <br>
+    <p class="email">
+      <%= current_user.email%>
+    </p>
     <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar2-link' %> |
     <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar2-link'  %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path, :class => 'navbar2-link'  %> |
-    <%= link_to "Login", new_user_session_path, :class => 'navbar2-link'  %>
-  <% end %>
+    <br>
+        <% else %>
+          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar2-link'  %> |
+            <%= link_to "Login", new_user_session_path, :class => 'navbar2-link'  %>
+              <% end %>
 </p>
-  <div id="app" class="container">
-    <a href="/books">
-      <carta data-image="images/collection.jpg">
-        <h1 id="book" slot="header">Collection</h1>
+<div id="app" class="container">
+  <a href="/books">
+    <carta data-image="images/collection.jpg">
+      <h1 id="book" slot="header">Collection</h1>
 
-      </carta>
-    </a>
+    </carta>
+  </a>
 
-    <a href="/books/new">
-      <carta data-image="images/reserv.jpg">
-        <h1 id="film" slot="header">Reservation</h1>
+  <a href="/books/new">
+    <carta data-image="images/reserv.jpg">
+      <h1 id="film" slot="header">Reservation</h1>
 
-      </carta>
-    </a>
+    </carta>
+  </a>
 
-    <a href="/manage_users">
-      <carta data-image="images/search.jpg">
-        <h1 id="music" slot="header">Search</h1>
+  <a href="/manage_users">
+    <carta data-image="images/search.jpg">
+      <h1 id="music" slot="header">Search</h1>
 
-      </carta>
-    </a>
-  </div>
+    </carta>
+  </a>
+</div>
+
+  <a href="" class="float">
+    <img src="images/settings.svg" height="32" width="32" class="my-float" id="home"> </img>
+  </a>
+
+</div>
 <% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
+  <p class="alert alert-success">
+    <%= notice %>
+  </p>
+  <% end %>
