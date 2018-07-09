@@ -55,4 +55,9 @@ module ApplicationHelper
     return 'Unrecognized'
   end
 
+  def getEmailById(id)
+    user = User.find_by_id(id)
+    return user.email
+  end
+
 end
