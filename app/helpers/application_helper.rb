@@ -65,6 +65,13 @@ module ApplicationHelper
     return true
   end
 
+  def self.hasValidRole(user)
+    if(!isUser(user) and !isOperator(user) and !isAdmin(user))
+      return false
+    end
+    return true
+  end
+
   def getRole(user)
     if isAdmin(user)
       return 'Admin'
@@ -81,23 +88,4 @@ module ApplicationHelper
     return user.email
   end
 
-  def self.canManageReservations(user)
-    if user!=nil
-      if !user.has_role? :admin and !user.has_role? :operator
-        redirect_to root_path alert: "User not enabled to manage reservations"
-      end
-    else
-      redirect_to root_path
-    end
-  end
-
-  def self.canManageUsers(user)
-    if user!=nil
-      if !user.has_role? :admin
-        redirect_to root_path alert: "User not enabled to manage users"
-      end
-    else
-      redirect_to root_path
-    end
-  end
 end

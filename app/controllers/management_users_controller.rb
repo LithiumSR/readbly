@@ -49,6 +49,12 @@ class ManagementUsersController < ApplicationController
   end
 
   def canManage
-    ApplicationHelper.canManageUsers(current_user)
+    if current_user!=nil
+      if !current_user.has_role? :admin
+        redirect_to root_path alert: "User not enabled to manage users"
+      end
+    else
+      redirect_to root_path
+    end
   end
 end

@@ -14,7 +14,13 @@ class ManagementReservationsController < ApplicationController
   end
 
   def canManage
-    ApplicationHelper.canManageReservations(current_user)
+    if current_user!=nil
+      if !current_user.has_role? :admin and !current_user.has_role? :operator
+        redirect_to root_path alert: "User not enabled to manage reservations"
+      end
+    else
+      redirect_to root_path
+    end
   end
 
 end
