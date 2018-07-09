@@ -7,13 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 Role.create(name: :admin)
-Role.create(name: :client)
-#Reservation.delete_all
-#User.delete_all
-#Book.delete_all
+Role.create(name: :user)
+Role.create(name: :operator)
+Reservation.delete_all
+User.delete_all
+Book.delete_all
 user1 = User.create!(email: 'admin@gmail.com',
                     password: 'password1234',
                     password_confirmation: 'password1234')
+user1.remove_role(:user)
 user1.add_role(:admin)
 user2 = User.create!(email: 'client@gmail.com',
                     password: 'password1234',
@@ -22,6 +24,7 @@ user2.add_role(:user)
 user3 = User.create!(email: 'operator@gmail.com',
                     password: 'password1234',
                     password_confirmation: 'password1234')
+user3.remove_role(:user)
 user3.add_role(:operator)
 book1 = Book.create!("title" => 'Harry Potter 1', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 1", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
 book2 = Book.create!("title" => 'Harry Potter 2', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 2", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
@@ -31,3 +34,12 @@ Book.create!("title" => 'Harry Potter 5', "author" => "JK", "publisher" => "Eina
 Book.create!("title" => 'Harry Potter 6', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 6", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
 Book.create!("title" => 'Harry Potter 7', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 7", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
 Reservation.create!("isReturned" => false, "isLoan"=> false, "user_id"=>user1.id, "book_id"=>book1.id)
+res2 =Reservation.create!("isReturned" => false, "isLoan"=> false, "user_id"=>user1.id, "book_id"=>book3.id)
+res2.isLoan = true;
+res2.expiration_date=DateTime.now + 1.month;
+res3 = Reservation.create!("isReturned" => false, "isLoan"=> false, "user_id"=>user1.id, "book_id"=>book2.id)
+res3.isLoan = true;
+res3.isReturned = true;
+res3.expiration_date=DateTime.now + 1.month;
+res2.save
+res3.save

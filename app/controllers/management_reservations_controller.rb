@@ -1,9 +1,10 @@
 class ManagementReservationsController < ApplicationController
-  before_action :canManage
+  before_action :hasValidRole
+  before_action :canManage, only: [:manage_reservations]
   def manage_reservations
-    @active_reservations = Reservation.all.select{|i| !i.isReturned}.select{|i| i.isLoan}.paginate(page: params[:page], per_page: 15)
-    @pending_reservations = Reservation.all.select{|i| !i.isReturned}.select{|i| !i.isLoan}.paginate(page: params[:page], per_page: 15)
-    @completed_reservations = Reservation.all.select{|i| i.isReturned}.select{|i| i.isLoan}.paginate(page: params[:page], per_page: 15)
+    @active_reservations = Reservation.all.select{|i| !i.isReturned and i.isLoan}.paginate(page: params[:page], per_page: 15)
+    @pending_reservations = Reservation.all.select{|i| !i.isReturned and !i.isLoan}.paginate(page: params[:page], per_page: 15)
+    @completed_reservations = Reservation.all.select{|i| i.isReturned and i.isLoan}.paginate(page: params[:page], per_page: 15)
   end
 
 
@@ -23,4 +24,9 @@ class ManagementReservationsController < ApplicationController
     end
   end
 
+  def hasValidRole
+    if current_user!=nil && !ApplicationHelper.hasValidRole(current_user)
+      redirect_to root_path alert: "Invalid role detected"
+    end
+  end
 end
