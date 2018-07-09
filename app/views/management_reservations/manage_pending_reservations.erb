@@ -1,0 +1,36 @@
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="/javascript/manage_users/manage_users.js"></script>
+</head>
+
+<p id="notice"><%= notice %></p>
+
+<body onload="manageUsersLoad();">
+<div class="container">
+<h1>Manage Pending Reservations</h1>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Created at</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @pending_reservations.each do |reservation| %>
+    <td><%= getEmailById(reservation.user_id)%></td>
+    <td><%= link_to  getBookById(reservation.book_id).title, getBookById(reservation.book_id) %></td>
+    <td><%= reservation.request_date %></td>
+    <td><%= button_to 'Confirm Loan', confirm_loan_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  <%= will_paginate @pending_reservations %>
+
+</table>
+</div>
+</body>
