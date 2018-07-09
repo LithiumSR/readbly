@@ -11,13 +11,13 @@ class Ability
     if user.has_role? :operator
       can :read, Book
       can :manage, Book
-      #can :manage, Reservation
-      #can :read, Reservation
+      can :manage, Reservation
+      can :read, Reservation
       end
     if user.has_role? :user
       can :read, Book
-      #can :manage, Reservation, user_id: user.username
-      #can :read, Reservation
+      can :manage, Reservation, user_id: user.id
+      can :read, Reservation
     end
   end
 end
