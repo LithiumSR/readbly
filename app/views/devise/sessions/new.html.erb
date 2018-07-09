@@ -1,52 +1,58 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= yield :meta %>
-  <meta name="robots" content="index,follow">
-  <title><%= yield :title %></title>
+    <meta name="robots" content="index,follow">
+    <title>
+      <%= yield :title %>
+    </title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/welcome.css">
     <%= csrf_meta_tags %>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 
 <body class="home">
-<p class="title">
-  <%= image_tag("rblogo.svg", :alt => "Readbly Logo", :align => "middle", :size => "142x188") %>
-  <u>Rea<b>db</b>ly</u>
-</p>
-
-<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ullamcorper sem, sit amet aliquam justo. Nulla interdum magna cursus tempus porta. Curabitur at sapien mi. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-
-<div class="rectangle">
-  <p class="lor">
-    Please <b>Login</b> on <b>Register</b>
+  <p class="title">
+    <%= image_tag("rblogo.svg", :alt => "Readbly Logo", :align => "middle", :size => "142x188") %>
+      <u>Rea
+        <b>db</b>ly</u>
   </p>
-  <div class="button" id="register">
-    <p class="text">
-      <a id="profile" href="./sign_up">Register</a>
+
+  <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ullamcorper sem, sit amet aliquam justo. Nulla interdum
+    magna cursus tempus porta. Curabitur at sapien mi. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+  <div class="rectangle">
+    <p class="lor">
+      Please
+      <b>Login</b> on
+      <b>Register</b>
     </p>
-  </div> 
-  <div class="button" id="login">
-    <p class="text">
-      <a id="profile" href="./login_email">Login via Email</a>
-    </p>
-  </div> 
-  <div class="button" id="login">
-    <p class="text">
-      <a id="profile" href="./auth/facebook">Login via Facebook</a>
-    </p>
-  </div> 
-  <div class="button" id="login">
-    <p class="text">
-    <a id="profile" href="./auth/google_oauth2">Login via Google</a>
-    </p>
-  </div> 
-  <div class="button" id="login">
-    <p class="text">
-    <a id="profile" href="./auth/github">Login via Github</a>
-    </p>
-  </div> 
-</div>
-  
+    <div class="button" id="register">
+      <p class="text">
+        <a id="profile" href="./sign_up">Register</a>
+      </p>
+    </div>
+    <div class="button" id="login">
+      <p class="text">
+        <a id="profile" href="./login_email">Login via Email</a>
+      </p>
+    </div>
+    <div class="button" id="login">
+      <p class="text">
+        <a id="profile" href="./auth/facebook">Login via Facebook</a>
+      </p>
+    </div>
+    <div class="button" id="login">
+      <p class="text">
+        <a id="profile" href="./auth/google_oauth2">Login via Google</a>
+      </p>
+    </div>
+    <div class="button" id="login">
+      <p class="text">
+        <a id="profile" href="./auth/github">Login via Github</a>
+      </p>
+    </div>
+  </div>
+
 </body>

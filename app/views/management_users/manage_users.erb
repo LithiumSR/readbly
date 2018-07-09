@@ -1,4 +1,3 @@
-
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -7,38 +6,50 @@
   <script src="/javascript/manage_users/manage_users.js"></script>
 </head>
 
-<p id="notice"><%= notice %></p>
+<p id="notice">
+  <%= notice %>
+</p>
 
 <body onload="manageUsersLoad();">
-<div class="container">
-<h1>Manage Users</h1>
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>Email</th>
-    <th>Role</th>
-    <th>Created at</th>
-    <th>Last sign in</th>
-    <th>Last IP</th>
-    </tr>
-  </thead>
-  <tbody>
-<% @users.each do |user| %>
-    <td><%= user.email %></td>
-    <td><%= getRole(user) %></td>
-    <td><%= user.created_at %></td>
-    <td><%= user.last_sign_in_at %></td>
-    <td><%= user.last_sign_in_ip %></td>
-    <td>
-      <%= form_for :changes, :url => {:action => "change_role",:id => user.email, :method => :put} do |f|%>
-        <%= f.select :role, options_for_select(User::ROLES) ,{}, { :class => 'select' }  %>
-        <%= f.submit "Change",  :disable_with => "Changing...", :class => 'change' %>
-      <% end %>
-    </td>
-    </tr>
-  <% end %>
-  </tbody>
-  <%= will_paginate @users %>
-</table>
-</div>
+  <div class="container">
+    <h1>Manage Users</h1>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Created at</th>
+          <th>Last sign in</th>
+          <th>Last IP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <td>
+            <%= user.email %>
+          </td>
+          <td>
+            <%= getRole(user) %>
+          </td>
+          <td>
+            <%= user.created_at %>
+          </td>
+          <td>
+            <%= user.last_sign_in_at %>
+          </td>
+          <td>
+            <%= user.last_sign_in_ip %>
+          </td>
+          <td>
+            <%= form_for :changes, :url => {:action => "change_role",:id => user.email, :method => :put} do |f|%>
+              <%= f.select :role, options_for_select(User::ROLES) ,{}, { :class => 'select' }  %>
+                <%= f.submit "Change",  :disable_with => "Changing...", :class => 'change' %>
+                  <% end %>
+          </td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @users %>
+  </div>
 </body>

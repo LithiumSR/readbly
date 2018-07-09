@@ -102,9 +102,8 @@
                 </tr>
                 <% end %>
         </tbody>
-        <%= will_paginate @pending_reservations %>
-
       </table>
+      <%= will_paginate @pending_reservations %>
     </div>
 
 
@@ -151,8 +150,8 @@
                 </tr>
                 <% end %>
         </tbody>
-        <%= will_paginate @active_reservations %>
       </table>
+      <%= will_paginate @active_reservations %>
     </div>
 
     <div id="complete" class="tabcontent">
@@ -196,8 +195,8 @@
                 </tr>
                 <% end %>
         </tbody>
-        <%= will_paginate @completed_reservations %>
       </table>
+      <%= will_paginate @completed_reservations %>
     </div>
 
   </div>
