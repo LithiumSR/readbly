@@ -8,6 +8,9 @@
 #
 Role.create(name: :admin)
 Role.create(name: :client)
+Reservation.delete_all
+User.delete_all
+Book.delete_all
 user1 = User.create!(email: 'admin@gmail.com',
                     password: 'password1234',
                     password_confirmation: 'password1234')
@@ -27,4 +30,4 @@ Book.create!("title" => 'Harry Potter 4', "author" => "JK", "publisher" => "Eina
 Book.create!("title" => 'Harry Potter 5', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 5", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
 Book.create!("title" => 'Harry Potter 6', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 6", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
 Book.create!("title" => 'Harry Potter 7', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 7", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
-Reservation.create!("request_date" => DateTime.now, "isReturned" => false, "isLoan"=> false, "user_id"=>user1.id, "book_id"=>book1.id)
+Reservation.create!("isReturned" => false, "isLoan"=> false, "user_id"=>user1.id, "book_id"=>book1.id)

@@ -7,5 +7,6 @@ class Reservation < ApplicationRecord
     self.isReturned = false
     self.isLoan = false
     self.isPostponed = false
+    self.request_date = DateTime.now
   end
 end
