@@ -74,4 +74,9 @@ class ReservationsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def book_reservations
+    @book = Book.find(params[:book_id])
+    @reservations = Array(Reservation.find_by('book_id' =>@book.id)).paginate(page: params[:page], per_page: 15)
+  end
 end

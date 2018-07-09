@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/manage_users/change_role', to: 'management_users#change_role', as:'change_role'
   get '/manage_reservations', to: 'management_reservations#manage_reservations'
   get '/my_reservations', to: 'management_reservations#my_reservations'
+  get '/reservation', to: 'reservations#book_reservations', as: 'book_reservations'
   put '/reservation/confirm_loan', to: 'reservations#confirm_loan', as: 'confirm_loan'
   put '/reservation/postpone_return', to: 'reservations#postpone_return', as: 'postpone_return'
   put '/reservation/confirm_return', to: 'reservations#confirm_return', as: 'confirm_return'
