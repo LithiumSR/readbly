@@ -6,7 +6,7 @@
 </head>
 
 <p id="notice"><%= notice %></p>
-
+<body>
 <div class="container">
   <h1>Books</h1>
 
@@ -25,7 +25,8 @@
 
     <tbody>
     <% @books.each do |book| %>
-    <%= isAvaiable=isAvaiable(book) %>
+    <% if isAvaiable=isAvaiable(book) %>
+    <% end %>
       <tr>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
@@ -45,3 +46,4 @@
 
   <br>
 </div>
+      </body>
