@@ -3,10 +3,14 @@
     background-color: #F8F8F8;
 }
 
+
 .email {
     font-family: 'Lato', serif;
     font-size: 50px;
     font-weight: 900;
+    display: block;
+    margin: 0 auto;
+
 }
 
 .container {
@@ -211,13 +215,15 @@ a:hover {
     visibility: visible;
     font-family: 'Lato', serif;
     font-size: 16px;
+    text-align: left;
     opacity: 1;
 }
 
 .dropdown-menu>div {
     background-color: rgba(0, 0, 0, 0);
-    position: absolute;
+    position: fixed;
     display: none;
+    right: 0;
 }
 
 .dropdown-menu>span:focus~div {

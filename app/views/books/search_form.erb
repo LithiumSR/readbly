@@ -1,34 +1,45 @@
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/book.css">
 </head>
 
-<h2> Book search</h2>
-<%= form_with url: search_results_url , method: :get, local: true do |form| %>
+<body>
+    <div class="container">
+        <h1>Find a book</h1>
+        <%= form_with url: search_results_url , name: "bookFrom", id:"myBookForm", method: :get, local: true do |form| %>
+            <fieldset class="form-fieldset ui-input __first" id="firstForm">
+                <input type="text" name="title" id="title" />
+                <label for="title">
+                    <span data-text="Title (Required)">Title</span>
+                </label>
+            </fieldset>
+            <fieldset class="form-fieldset ui-input __second">
+                    <input type="text" name="author" id="author" />
+                    <label for="author">
+                        <span data-text="Author">Author</span>
+                    </label>
+                </fieldset>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: 'title' %>
-  </div>
+            <fieldset class="form-fieldset ui-input __third">
+                <input type="text" id="isbn" tabindex="0" maxlength="13" />
+                <label for="isbn">
+                    <span data-text="ISBN">ISBN</span>
+                </label>
+            </fieldset>
 
-  <div class="field">
-    <%= form.label :author %>
-    <%= form.text_field :author, id: 'author' %>
-  </div>
+            <fieldset class="form-fieldset ui-input __fourth">
+                    <input min="0" id="released_at" type="number" name="released_at" />
+                <label for="released_at">
+                    <span data-text="Max Number of Results">Max Number of Results</span>
+                </label>
+            </fieldset>
 
-  <div class="field">
-    <%= form.label :isbn %>
-    <%= form.text_field :isbn, id: 'isbn', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57;', maxlength: 13%>
-  </div>
+            <div class="form-footer">
+                <input type="submit" name="commit" id="bottone" class="btn" value="Search" data-disable-with="Search">
+                <input type="reset" id="bottone" class="btn" value="Reset">
+            </div>
 
-  <div class="field">
-    <%= form.label :released_at %>
-    <%= form.number_field :released_at, min: 0,  id: 'released_at' %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Search"%>
-  </div>
-<% end %>
+        <% end %>
+    </div>
+</body>

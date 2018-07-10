@@ -13,7 +13,9 @@
 
 <p class="navbar2-text pull-right">
   <% if user_signed_in? %>
+
     <p class="email">
+      <%= image_tag("rblogo.svg", :alt => "Readbly Logo", :align => "middle", :size => "64x85", :class => "rblogo") %>
       <%= current_user.email%>
     </p>
         <br>
@@ -30,14 +32,14 @@
     </carta>
   </a>
 
-  <a href="/books/new">
+  <a href="/my_reservations">
     <carta data-image="images/reserv.jpg">
       <h1 id="film" slot="header">Reservation</h1>
 
     </carta>
   </a>
 
-  <a href="/manage_users">
+  <a href="/book/search">
     <carta data-image="images/search.jpg">
       <h1 id="music" slot="header">Search</h1>
 
@@ -51,8 +53,8 @@
     <img src="images/settings.svg" height="32" width="32" class="my-float" id="home"> </img></span>
   <div tabindex="0" onclick="return true"></div>
   <ul>
-    <li><a href="" onclick="sampleMenu(this)">Item 1</a></li>
-    <li><a href="" onclick="sampleMenu(this)">Item 2</a></li>
+    <li><a href="/manage_users" onclick="sampleMenu(this)">Manage Users</a></li>
+    <li><a href="manage_reservations" onclick="sampleMenu(this)">Manage Reservations</a></li>
     <li><a href="users/edit" onclick="sampleMenu(this)">Edit Profile</a></li>
     <li><a href="users/sign_out" onclick="sampleMenu(this)">Logout</a></li>
   </ul>
