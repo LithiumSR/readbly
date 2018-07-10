@@ -1,13 +1,14 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="/javascript/books/book_search_form.js"></script>
   <link rel="stylesheet" type="text/css" href="/stylesheets/book.css">
 </head>
 
-<body>
+<body onload="initializeBookStorage()">
     <div class="container">
         <h1>Find a book</h1>
-        <%= form_with url: search_results_url , name: "bookFrom", id:"myBookForm", method: :get, local: true do |form| %>
+        <%= form_with url: search_results_url , name: "bookFrom", id:"myBookForm", method: :get, :html => { :onsubmit => "return addBookStorage()" }, local: true do |form| %>
             <fieldset class="form-fieldset ui-input __first" id="firstForm">
                 <input type="text" name="title" id="title" />
                 <label for="title">
@@ -39,7 +40,7 @@
                 <input type="submit" name="commit" id="bottone" class="btn" value="Search" data-disable-with="Search">
                 <input type="reset" id="bottone" class="btn" value="Reset">
             </div>
-
         <% end %>
+      <div id="bookStorage"></div>
     </div>
 </body>
