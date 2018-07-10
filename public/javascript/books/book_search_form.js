@@ -11,8 +11,8 @@ function addBookStorage() {
 	var author = document.getElementById("author").value.trim();
 	var isbn = document.getElementById("isbn").value.trim();
 	var year = document.getElementById("released_at").value.trim();
-	if (title == "" && author == "") {
-		alert("Title and ISBN can't be both left blank");
+	if (title == "" && author == "" && isbn == "" && year == "") {
+		alert("Title, Author, Year of release and ISBN can't be left blank");
 		return false;
 	}
 	if ((title == "" || author == "") && isbn != "") {
