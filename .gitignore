@@ -33,3 +33,4 @@
 
 # Ignore rspec files
 .rspec
+.DS_Store

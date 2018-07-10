@@ -16,8 +16,6 @@
     <p class="email">
       <%= current_user.email%>
     </p>
-    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar2-link' %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar2-link'  %>
         <br>
         <% else %>
           <%= link_to "Sign up", new_user_registration_path, :class => 'navbar2-link'  %> |
@@ -47,9 +45,19 @@
   </a>
 </div>
 
-<a href="" class="float">
-  <img src="images/settings.svg" height="32" width="32" class="my-float" id="home"> </img>
-</a>
+<div class="float">
+<div class="dropdown-menu">
+  <span tabindex="0" onclick="return true">
+    <img src="images/settings.svg" height="32" width="32" class="my-float" id="home"> </img></span>
+  <div tabindex="0" onclick="return true"></div>
+  <ul>
+    <li><a href="" onclick="sampleMenu(this)">Item 1</a></li>
+    <li><a href="" onclick="sampleMenu(this)">Item 2</a></li>
+    <li><a href="users/edit" onclick="sampleMenu(this)">Edit Profile</a></li>
+    <li><a href="users/sign_out" onclick="sampleMenu(this)">Logout</a></li>
+  </ul>
+</div>
+</div>
 
 </div>
 <% if notice %>
