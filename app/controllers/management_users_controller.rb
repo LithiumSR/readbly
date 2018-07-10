@@ -1,4 +1,5 @@
 class ManagementUsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :canManage
   def manage_users
     @users = User.all.paginate(page: params[:page], per_page: 15)
@@ -50,7 +51,7 @@ class ManagementUsersController < ApplicationController
 
   def canManage
     if current_user!=nil
-      if !current_user.has_role? :admin
+      if !current_user.has_role? :admin or !ApplicationHelper.hasValidRole(current_user)
         redirect_to root_path alert: "User not enabled to manage users"
       end
     else
