@@ -50,13 +50,17 @@
 <div class="float">
 <div class="dropdown-menu">
   <span tabindex="0" onclick="return true">
-    <img src="images/settings.svg" height="32" width="32" class="my-float" id="home"> </img></span>
+    <img src="images/settings.svg" height="32" width="32" class="my-float" id="home"/></span>
   <div tabindex="0" onclick="return true"></div>
   <ul>
+    <% if isAdmin(current_user) %>
     <li><a href="/manage_users" onclick="sampleMenu(this)">Manage Users</a></li>
+    <% end %>
+    <% if isAdmin(current_user) or isOperator(current_user) %>
     <li><a href="manage_reservations" onclick="sampleMenu(this)">Manage Reservations</a></li>
-    <li><a href="users/edit" onclick="sampleMenu(this)">Edit Profile</a></li>
-    <li><a href="users/sign_out" onclick="sampleMenu(this)">Logout</a></li>
+    <% end %>
+    <%= link_to 'Edit profile', edit_user_registration_path, :onclick => 'sampleMenu(this)'%>
+    <%= link_to 'Logout', destroy_user_session_path, :onclick => 'sampleMenu(this)', method: :delete%>
   </ul>
 </div>
 </div>
