@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'ransack'
 gem 'will_paginate', '~> 3.1.0'
 gem 'table_print'
 gem 'webpack', require: false

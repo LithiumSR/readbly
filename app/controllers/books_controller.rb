@@ -13,16 +13,23 @@ class BooksController < ApplicationController
   end
 
   def results_search
-    if !ApplicationHelper.isValidString(params[:title]) and !ApplicationHelper.isValidString(params[:author]) and ApplicationHelper.isValidString(params[:isbn]) and (params[:isbn].to_s.length==13 or params[:isbn].to_s.length==10)
+    title_valid = ApplicationHelper.isValidString(params[:title])
+    author_valid = ApplicationHelper.isValidString(params[:author])
+    year_valid = true
+    if !ApplicationHelper.isValidString(params[:released_at]) or params[:released_at].to_i <0
+      year_valid = false
+    end
+
+    if ApplicationHelper.isValidString(params[:isbn]) and (params[:isbn].to_s.length==13 or params[:isbn].to_s.length==10)
       return @books = Array(Book.all.select{|i| i.isbn == params[:isbn].to_s.strip}).paginate(page: params[:page], per_page: 15)
-    elsif ApplicationHelper.isValidString(params[:title]) and !ApplicationHelper.isValidString(params[:author])
-
-    elsif !ApplicationHelper.isValidString(params[:title]) and ApplicationHelper.isValidString(params[:author])
-
+    elsif title_valid or author_valid or year_valid
+        @search = Book.ransack(title_cont: params[:title], author_cont: params[:author], released_at_eq: params[:released_at])
+        return @books = Array(@search.result).paginate(page: params[:page], per_page: 15)
     else
-      redirect_back fallback_location: root_path, alert: 'Invalid search request' and return
+      redirect_back fallback_location: root_path, alert: 'Invalid search request' + title_valid.to_s + author_valid.to_s + year_valid.to_s and return
     end
   end
+
   # GET /books/1
   # GET /books/1.json
   def show
