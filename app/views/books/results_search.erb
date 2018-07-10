@@ -1,0 +1,47 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <h1>Books</h1>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Publisher</th>
+      <th>Overview</th>
+      <th>Isbn</th>
+      <th>Release year</th>
+      <th>Avaiable</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @books.each do |book| %>
+    <%= isAvaiable=isAvaiable(book) %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.publisher %></td>
+        <td><%= book.overview %></td>
+        <td><%= book.isbn %></td>
+        <td><%= book.released_at %></td>
+        <td><%= isAvaiable %></td>
+        <% if isAvaiable %>
+          <td><%= button_to 'Place reservation', create_reservation_url, method: :post, data: { confirm: 'Are you sure?' }, params: {book_id: book.id} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <%= will_paginate @books %>
+    </tbody>
+  </table>
+
+  <br>
+</div>

@@ -81,4 +81,10 @@ module ApplicationHelper
     return user.email
   end
 
+  def self.isValidString(string)
+    if string.nil? or string.strip.empty?
+      return false
+    end
+    return true
+  end
 end

@@ -1,0 +1,24 @@
+<script src="https://cdn.jsdelivr.net/npm/kotlin@1.2.51/kotlin.min.js"></script>
+<script src="/javascript/books/bookinfo_kotlin.js"></script>
+
+<%= form_with url: search_results_url , method: :get, local: true do |form| %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: 'title' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :author %>
+    <%= form.text_field :author, id: 'author' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :isbn %>
+    <%= form.text_field :isbn, id: 'isbn', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57;', maxlength: 13%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Search"%>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :canManage, only: [:confirm_loan, :confirm_return]
 
   def delete
@@ -17,6 +18,18 @@ class ReservationsController < ApplicationController
     else redirect_back fallback_location: root_path, alert: 'Error when deleting a reservation' and return
     end
 
+  end
+
+
+  def create
+    if !ApplicationHelper.isValidString(params[:book_id])
+      redirect_back fallback_location: root_path, alert: 'Missing book id!' and return
+    end
+    if !ApplicationHelper.hasValidRole(current_user)
+      redirect_back fallback_location: root_path, alert: 'Invalid role for user account!' and return
+    end
+    Reservation.create!("book_id" => params[:book_id], "user_id" => current_user.id)
+    redirect_back fallback_location: root_path
   end
 
   def confirm_loan
@@ -67,7 +80,7 @@ class ReservationsController < ApplicationController
 
   def canManage
     if current_user!=nil
-      if !current_user.has_role? :admin and !current_user.has_role? :operator
+      if (!current_user.has_role? :admin and !current_user.has_role? :operator) or !ApplicationHelper.hasValidRole(current:user)
         redirect_to root_path alert: "User not enabled to manage reservations"
       end
     else

@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  skip_authorize_resource :only => [:search_form,:results_search]
   load_and_authorize_resource
   # GET /books
   # GET /books.json
@@ -8,6 +9,20 @@ class BooksController < ApplicationController
     @books = Book.all.paginate(page: params[:page], per_page: 15)
   end
 
+  def search_form
+  end
+
+  def results_search
+    if !ApplicationHelper.isValidString(params[:title]) and !ApplicationHelper.isValidString(params[:author]) and ApplicationHelper.isValidString(params[:isbn]) and (params[:isbn].to_s.length==13 or params[:isbn].to_s.length==10)
+      return @books = Array(Book.all.select{|i| i.isbn == params[:isbn].to_s.strip}).paginate(page: params[:page], per_page: 15)
+    elsif ApplicationHelper.isValidString(params[:title]) and !ApplicationHelper.isValidString(params[:author])
+
+    elsif !ApplicationHelper.isValidString(params[:title]) and ApplicationHelper.isValidString(params[:author])
+
+    else
+      redirect_back fallback_location: root_path, alert: 'Invalid search request' and return
+    end
+  end
   # GET /books/1
   # GET /books/1.json
   def show
