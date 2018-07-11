@@ -30,11 +30,11 @@ function addBookStorage() {
 			return false;
 		}
 	}
-
+    document.getElementById("search_button").disabled=true;
 	if (author == "") author = "--";
 	if (title == "") title = "--";
-	if (isbn == "") isbn = "--"
-    if (year == "") year = "--"
+	if (isbn == "") isbn = "--";
+    if (year == "") year = "--";
 	var currentdate = new Date();
 	var datetime = currentdate.getDate() + "/" +
 		(currentdate.getMonth() + 1) + "/" +

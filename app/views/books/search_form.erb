@@ -6,40 +6,40 @@
 </head>
 
 <body onload="initializeBookStorage()">
-    <div class="container">
+    <div class="container" onkeypress="return checkSubmit(event)">
         <h1>Find a book</h1>
         <%= form_with url: search_results_url , name: "bookFrom", id:"myBookForm", method: :get, :html => { :onsubmit => "return addBookStorage()" }, local: true do |form| %>
             <fieldset class="form-fieldset ui-input __first" id="firstForm">
-                <input type="text" name="title" id="title" />
+                <%= form.text_field :title, id: 'title' %>
                 <label for="title">
                     <span data-text="Title (Required)">Title</span>
                 </label>
             </fieldset>
             <fieldset class="form-fieldset ui-input __second">
-                    <input type="text" name="author" id="author" />
-                    <label for="author">
-                        <span data-text="Author">Author</span>
-                    </label>
-                </fieldset>
+                <%= form.text_field :author, id: 'author' %>
+                <label for="author">
+                  <span data-text="Author">Author</span>
+                </label>
+            </fieldset>
 
             <fieldset class="form-fieldset ui-input __third">
-                <input type="text" id="isbn" tabindex="0" maxlength="13" />
+                <%= form.text_field :isbn, id: 'isbn', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57;', maxlength: 13%>
                 <label for="isbn">
                     <span data-text="ISBN">ISBN</span>
                 </label>
             </fieldset>
 
             <fieldset class="form-fieldset ui-input __fourth">
-                    <input min="0" id="released_at" type="number" name="released_at" />
+                <%= form.number_field :released_at, min: 0,  id: 'released_at' %>
                 <label for="released_at">
                     <span data-text="Release year" >Release year</span>
                 </label>
             </fieldset>
 
-            <div class="form-footer">
-                <input type="submit" name="commit" id="bottone" class="btn" value="Search">
-                <input type="reset" id="bottone" class="btn" value="Reset">
-            </div>
+        <div class="form-footer">
+          <%= form.submit "Search", :class => 'btn', :id => 'search_button', data: { disable_with: false }%>
+          <%= submit_tag("Reset", { :name => 'reset', :id => 'reset', :type => 'reset', :class => 'btn', data: { disable_with: false }}) %>
+        </div>
         <% end %>
       <div id="bookStorage"></div>
     </div>
