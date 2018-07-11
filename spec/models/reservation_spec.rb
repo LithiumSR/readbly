@@ -18,7 +18,7 @@ RSpec.describe Reservation, type: :model do
 
 
   describe "Create a reservation with an empty book_id " do
-    it "should be permitted" do
+    it "shouldn't  be permitted" do
       user = build(:user)
       res = Reservation.create(user_id: user.id)
       expect(res).to_not be_valid
@@ -26,7 +26,7 @@ RSpec.describe Reservation, type: :model do
   end
 
   describe "Create a reservation with an empty user_id " do
-    it "should be permitted" do
+    it "shouldn't be permitted" do
       book = build(:book)
       res = Reservation.create(book_id: book.id)
       expect(res).to_not be_valid
