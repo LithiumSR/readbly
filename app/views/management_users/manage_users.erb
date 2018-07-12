@@ -41,7 +41,7 @@
             <%= user.last_sign_in_ip %>
           </td>
           <td>
-            <%= form_for :changes, :url => {:action => "change_role",:id => user.email, :method => :put} do |f|%>
+            <%= form_for :changes, :url => {:action => "change_role",:id => user.id} do |f|%>
               <%= f.select :role, options_for_select(User::ROLES) ,{}, { :class => 'select' }  %>
                 <%= f.submit "Change",  :disable_with => "Changing...", :class => 'change' %>
                   <% end %>

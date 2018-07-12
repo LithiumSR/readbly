@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get '/book_api', to: 'api#get_info'
   get '/manage_users', to: 'management_users#manage_users'
-  put '/users/promote', to: 'management_users#promote', as: 'promote'
-  put '/users/demote', to: 'management_users#demote', as: 'demote'
   post '/users/change_role', to: 'management_users#change_role', as:'change_role'
   get '/manage_reservations', to: 'management_reservations#manage_reservations'
   get '/my_reservations', to: 'management_reservations#my_reservations'

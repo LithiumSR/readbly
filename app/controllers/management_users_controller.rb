@@ -6,46 +6,17 @@ class ManagementUsersController < ApplicationController
   end
 
   def change_role
-    email = params[:id]
+    id = params[:id]
     newrole = params[:changes][:role]
     if !User::ROLES.include?(newrole)
       redirect_to 'manage_users' and return
     end
-    user = User.find_by(email: email)
+    user = User.find_by(id: id)
+    raise ActiveRecord::RecordNotFound, "Can't find the ActiveRecord for the user" unless !user.nil?
     for role in User::ROLES
       user.remove_role(role.downcase)
     end
     user.add_role(newrole.downcase)
-    redirect_to '/manage_users' and return
-  end
-
-  def promote
-    email = params[:id]
-    role = params[:role]
-    if !User::ROLES.include?(role)
-      redirect_to 'manage_users' and return
-    end
-    user = User.find_by(email: email)
-    if role=='Operator'
-      user.add_role(:operator)
-    elsif role=='Admin'
-      user.add_role(:admin)
-    end
-    redirect_to '/manage_users' and return
-  end
-
-  def demote
-    email = params[:id]
-    role = params[:role]
-    if !User::ROLES.include?(role)
-      redirect_to 'manage_users' and return
-    end
-    user = User.find_by(email: email)
-    if role=='Operator'
-      user.remove_role(:operator)
-    elsif role=='Admin'
-      user.remove_role(:admin)
-    end
     redirect_to '/manage_users' and return
   end
 
