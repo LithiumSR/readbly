@@ -44,6 +44,13 @@ RSpec.describe ManagementUsersController, type: :controller do
         get :change_role, params: {:id =>  user.id, :changes => {:role => 'Admin'} }
         assert_redirected_to user_session_url
       end
+
+      it "user should remain unchanged" do
+        user = create(:user)
+        old_attr = user.attributes
+        get :change_role, params: {:id =>  user.id, :changes => {:role => 'Admin'} }
+        expect(User.find(user.id).attributes).to eq(old_attr)
+      end
     end
 
     context "as an admin with a non existent user.id param and a new role"  do
