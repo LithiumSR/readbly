@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :canDelete, only: [:destroy]
   skip_authorize_resource :only => [:search_form,:results_search]
   load_and_authorize_resource
   # GET /books
@@ -93,5 +94,15 @@ class BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:title, :author, :publisher, :overview, :isbn, :created_at, :released_at, :coverlink)
+    end
+
+    def canDelete
+      if current_user!=nil
+        if !current_user.has_role? :admin or !ApplicationHelper.hasValidRole(current_user)
+          redirect_to root_path alert: "User not enabled to manage users"
+        end
+      else
+        redirect_to root_path
+      end
     end
 end
