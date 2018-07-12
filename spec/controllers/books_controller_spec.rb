@@ -3,15 +3,14 @@ require 'rails_helper'
 RSpec.describe BooksController, type: :controller do
 
   describe "GET #index " do
-    context "with valid logged user"  do
+    context "when logged in"  do
       login_user
-
       it "renders the index template" do
         get :index
         expect(response).to render_template("index")
       end
     end
-    context "without a logged user" do
+    context "when not logged in" do
       describe "GET #index without a logged account" do
         it "redirects to sign_in page" do
           get :index
@@ -22,7 +21,7 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe "POST #create" do
-    context "with valid attributes and a valid operator account" do
+    context "as an operator with valid params" do
       login_operator
       it "should increment book count by one" do
           before = Book.all.length
@@ -32,7 +31,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with valid attributes and a valid admin account" do
+    context "as an admin with valid params" do
       login_admin
       it "should increment book count by one" do
         before = Book.all.length
@@ -42,7 +41,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with valid attributes and a valid user account" do
+    context "as a basic user with valid params" do
       login_user
       it "shouldn't increment book count by one" do
         before = Book.all.length
@@ -52,7 +51,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with valid attributes and without an account" do
+    context "as a not signed-in user with valid params" do
       it "shouldn't increment book count by one" do
         before = Book.all.length
         post :create, params: {:book => attributes_for(:book)}
@@ -63,7 +62,7 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe "GET #show" do
-    context "with a valid book id user account" do
+    context "as a basic user with a valid book id" do
       login_user
       it "should render show page correctly" do
         book = create(:book)
@@ -72,7 +71,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with a valid book id and an admin account" do
+    context "as an admin with a valid book id" do
       login_admin
       it "should render show page correctly" do
         book = create(:book)
@@ -81,7 +80,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with a valid book id and an operator account" do
+    context "as an operator with a valid book id" do
       login_operator
       it "should render show page correctly" do
         book = create(:book)
@@ -90,7 +89,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with a valid book id but without a logged account" do
+    context "as a not signed-in user with a valid book id" do
       it "should redirect to the sign in page" do
         book = create(:book)
         get :show, params:{:id => book.id}
@@ -98,8 +97,8 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with a valid logged account but an invalid id" do
-      login_operator
+    context "as a signed-in user with an invalid book id" do
+      login_user
       it "should raise a RecordNotFound error" do
         expect{get :show, params:{:id => -1}}.to raise_error(ActiveRecord::RecordNotFound)
       end
@@ -107,7 +106,7 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    context "with valid attributes and a valid operator account" do
+    context "as an operator with a valid book id" do
       login_operator
       it "book count should not change" do
         book = create(:book)
@@ -118,7 +117,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with valid attributes and a valid admin account" do
+    context "as an admin with a valid book id" do
       login_admin
       it "should decrement book count by one" do
         book = create(:book)
@@ -129,7 +128,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with valid attributes and a valid user account" do
+    context "as a basic user with a valid book id" do
       login_user
       it "book count should not change" do
         book = create(:book)
@@ -140,7 +139,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with valid attributes and without an account" do
+    context "as a not signed-in user with a valid book id" do
       it "book count should not change" do
         book = create(:book)
         before = Book.all.length
@@ -150,7 +149,7 @@ RSpec.describe BooksController, type: :controller do
       end
     end
 
-    context "with a valid logged account but an invalid id" do
+    context "as an admin with an invalid book id" do
       login_admin
       it "should raise a RecordNotFound error" do
         expect{delete :destroy, params:{:id => -1}}.to raise_error(ActiveRecord::RecordNotFound)
