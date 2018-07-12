@@ -28,7 +28,10 @@ class ReservationsController < ApplicationController
     if !ApplicationHelper.hasValidRole(current_user)
       redirect_back fallback_location: root_path, alert: 'Invalid role for user account!' and return
     end
-    Reservation.create!("book_id" => params[:book_id], "user_id" => current_user.id)
+    if params[:user_id]!=current_user.id and !current_user.has_role?(:admin)
+      redirect_back fallback_location: root_path, alert: "You don't have the permission to create a reservation for another user!" and return
+    end
+    Reservation.create!("book_id" => params[:book_id], "user_id" => params[:user_id])
     redirect_back fallback_location: root_path
   end
 
