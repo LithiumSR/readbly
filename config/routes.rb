@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   put '/reservation/confirm_loan', to: 'reservations#confirm_loan', as: 'confirm_loan'
   put '/reservation/postpone_return', to: 'reservations#postpone_return', as: 'postpone_return'
   put '/reservation/confirm_return', to: 'reservations#confirm_return', as: 'confirm_return'
-  delete '/reservation/delete', to: 'reservations#delete', as: 'delete_reservation'
+  delete '/reservation/delete', to: 'reservations#destroy', as: 'delete_reservation'
   devise_scope :user do
     get '/users/login_email', to: 'login#login_email'
   end

@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
   before_action :canManage, only: [:confirm_loan, :confirm_return]
 
-  def delete
+  def destroy
     if !user_signed_in?
       redirect_to root_path and return
     end
@@ -37,7 +37,7 @@ class ReservationsController < ApplicationController
 
   def confirm_loan
     reservation = Reservation.find(params[:id])
-    if reservation !=nil
+    if reservation !=nil and !reservation.isLoan
       reservation.isLoan=true
       reservation.expiration_date = DateTime.now.to_date + 1.month
       reservation.save
@@ -83,7 +83,7 @@ class ReservationsController < ApplicationController
 
   def canManage
     if current_user!=nil
-      if (!current_user.has_role? :admin and !current_user.has_role? :operator) or !ApplicationHelper.hasValidRole(current:user)
+      if (!current_user.has_role? :admin and !current_user.has_role? :operator) or !ApplicationHelper.hasValidRole(current_user)
         redirect_to root_path alert: "User not enabled to manage reservations"
       end
     else
