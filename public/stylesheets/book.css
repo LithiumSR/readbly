@@ -47,8 +47,6 @@ h2 {
     font-size: 24px;
     outline: 0;
     width: 100%;
-    tap-highlight-color: transparent;
-    touch-callout: none;
 }
 
 .ui-input input+label {
@@ -101,7 +99,6 @@ h2 {
     background-image: linear-gradient(to right, rgb(45, 207, 126) 50%, rgba(255, 255, 255, 0) 0%);
     background-position: 100% 50%;
     background-size: 200%;
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     backface-visibility: hidden;
     perspective: 1000;

@@ -1,16 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
-.html {
-    background-color: #F8F8F8;
-}
-
-
 .email {
     font-family: 'Lato', serif;
     font-size: 50px;
     font-weight: 900;
     display: block;
     margin: 0 auto;
-
 }
 
 .container {
@@ -247,17 +241,18 @@ a:hover {
 ul {
     list-style-type: none;
     padding-left: 0px;
-  }
+    line-height: 200%;
+}
 
-  li {
+li {
     margin: 10px 0;
-  }
+}
 
-  li:hover {
-      background-color: transparent;
-  }
+li:hover {
+    background-color: transparent;
+}
 
-  a:hover {
+a:hover {
     background-color: transparent;
     color: #333;
-  }
+}
