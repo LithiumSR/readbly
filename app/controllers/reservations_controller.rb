@@ -48,7 +48,7 @@ class ReservationsController < ApplicationController
 
   def confirm_return
     reservation = Reservation.find(params[:id])
-    if reservation !=nil and reservation.isLoan
+    if reservation !=nil and reservation.isLoan and !reservation.isReturned
       reservation.isReturned=true
       reservation.returned_date=DateTime.now
       reservation.save
@@ -64,13 +64,16 @@ class ReservationsController < ApplicationController
     reservation = Reservation.find(params[:id])
     if reservation !=nil and reservation.isLoan
       if ApplicationHelper.isUser(current_user) and (reservation.expiration_date - DateTime.now).to_i>=7
-        redirect_to '/manage_reservations',alert: "You can't postpone the expiration date this early!..." and return
+        redirect_to '/manage_reservations',alert: "You can't postpone the expiration date this early..." and return
       end
       if ApplicationHelper.isUser(current_user) and reservation.isPostponed
-        redirect_to '/manage_reservations',alert: "You can't postpone this reservation again!..." and return
+        redirect_to '/manage_reservations',alert: "You can't postpone this loan again..." and return
       end
-      if ApplicationHelper.isOperator(current_user) and reservation.isPostponed and reservation.postpone_counter>3
-        redirect_to '/manage_reservations',alert: "You can't postpone this reservation more than 3 times!..." and return
+      if ApplicationHelper.isUser(current_user) and reservation.user_id != current_user.id
+        redirect_to '/manage_reservations',alert: "You can't postpone a loan of another user..." and return
+      end
+      if ApplicationHelper.isOperator(current_user) and reservation.isPostponed and reservation.postpone_counter>=3
+        redirect_to '/manage_reservations',alert: "You can't postpone this reservation more than 3 times..." and return
       end
       reservation.isPostponed=true
       reservation.postpone_counter+=1
