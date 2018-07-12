@@ -5,6 +5,6 @@ end
 When("I sign up with email {string} and password {string}") do |string, string2|
   fill_in "Email", :with => string
   fill_in "Password", :with => string2
-  fill_in "Password confirmation", :with => string2
-  click_button "Sign up"
+  fill_in "Password Confirmation", :with => string2
+  click_button "Sign Up"
 end
