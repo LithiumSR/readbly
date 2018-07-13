@@ -189,41 +189,9 @@ a:visited {
     position: relative;
 }
 
-.dropdown-menu>span:focus~ul {
-    visibility: visible;
-}
-
 .dropdown-menu>ul {
     position: absolute;
-    visibility: hidden;
     transition: visibility 0.5s;
-    opacity: 0;
-}
-
-.dropdown-menu>span:focus~ul {
-    visibility: visible;
-    font-family: 'Lato', serif;
-    font-size: 16px;
-    text-align: left;
-    opacity: 1;
-}
-
-.dropdown-menu>div {
-    background-color: rgba(0, 0, 0, 0);
-    position: fixed;
-    display: none;
-    right: 0;
-}
-
-.dropdown-menu>span:focus~div {
-    display: block;
-}
-
-.dropdown-menu>span {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .dropdown-menu>span,

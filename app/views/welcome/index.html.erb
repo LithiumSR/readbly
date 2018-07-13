@@ -8,6 +8,21 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
     <script type="text/javascript" src="javascript/home/app_min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+      $(document).ready(function(){
+          $(".menu").hide();
+          $(document).on('click', function(e){
+              if(e.target.id=="home" || e.target.id=="dropdown-button"){
+                  if($("#dropdown-button").find('.menu').eq(0).is(":visible")) $(".menu").hide();
+                  else $(".menu").show();
+              }
+              else {
+                  $(".menu").hide();
+              }
+          });
+      });
+  </script>
     <%= csrf_meta_tags %>
 </head>
 
@@ -48,21 +63,21 @@
 </div>
 
 <div class="float">
-<div class="dropdown-menu">
+<div class="dropdown-menu", id="dropdown-button">
   <span tabindex="0">
     <img src="images/settings.svg" height="32" width="32" class="my-float" id="home"/></span>
   <div tabindex="0"></div>
   <ul>
-    <% if isAdmin(current_user) or isOperator(current_user) %><li><a href="books/new" onclick="sampleMenu(this)">Add a new book</a></li>
+    <% if isAdmin(current_user) or isOperator(current_user) %><li><a href="books/new" onclick="sampleMenu(this)", class="menu">Add a new book</a></li>
     <% end %>
     <% if isAdmin(current_user) %>
-    <li><a href="/manage_users" onclick="sampleMenu(this)">Manage Users</a></li>
+    <li><a href="/manage_users" onclick="sampleMenu(this)", class = "menu">Manage Users</a></li>
     <% end %>
     <% if isAdmin(current_user) or isOperator(current_user) %>
-    <li><a href="manage_reservations" onclick="sampleMenu(this)">Manage Reservations</a></li>
+    <li><a href="manage_reservations" onclick="sampleMenu(this)", class="menu">Manage Reservations</a></li>
     <% end %>
-    <%= link_to 'Edit profile', edit_user_registration_path, :onclick => 'sampleMenu(this)'%>
-    <%= link_to 'Logout', destroy_user_session_path, :onclick => 'sampleMenu(this)', method: :delete%>
+    <%= link_to 'Edit profile', edit_user_registration_path, :onclick => 'sampleMenu(this)', :class => "menu"%>
+    <%= link_to 'Logout', destroy_user_session_path, :onclick => 'sampleMenu(this)', method: :delete, :class => "menu"%>
   </ul>
 </div>
 </div>
