@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe ManagementUsersController, type: :controller do
+
+  def get_attributes(obj)
+    attr = obj.attributes
+    attr['updated_at'] = attr['updated_at'].change(:usec => 0)
+    attr['created_at'] = attr['created_at'].change(:usec => 0)
+    attr
+  end
+
   describe "GET #change_role " do
     context "as an admin with valid user.id and a new role"  do
       login_admin
@@ -47,9 +55,9 @@ RSpec.describe ManagementUsersController, type: :controller do
 
       it "user should remain unchanged" do
         user = create(:user)
-        old_attr = user.attributes
+        old_attr = get_attributes user
         get :change_role, params: {:id =>  user.id, :changes => {:role => 'Admin'} }
-        expect(User.find(user.id).attributes).to eq(old_attr)
+        expect(get_attributes User.find(user.id)).to eq(old_attr)
       end
     end
 
