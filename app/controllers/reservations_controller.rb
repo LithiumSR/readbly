@@ -37,7 +37,7 @@ class ReservationsController < ApplicationController
 
   def confirm_loan
     reservation = Reservation.find(params[:id])
-    if reservation !=nil and !reservation.isLoan
+    if reservation !=nil and !reservation.isLoan and !reservation.isReturned
       reservation.isLoan=true
       reservation.expiration_date = DateTime.now.to_date + 1.month
       reservation.save
