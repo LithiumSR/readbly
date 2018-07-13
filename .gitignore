@@ -34,3 +34,5 @@
 # Ignore rspec files
 .rspec
 .DS_Store
+
+public/packs

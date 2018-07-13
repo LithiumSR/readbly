@@ -92,3 +92,38 @@ a, a:hover {
     background-color: rgba(0, 0, 0, 0);
     pointer-events: all;
 }
+
+.labelField {
+    text-align: center;
+}
+
+.devise-container {
+    text-align: center;
+}
+
+.field-pull-left {
+    text-align: center;
+}
+
+.checkbox {
+    width: auto;
+}
+
+.login {
+    text-align: center;
+    width: 200px;
+    background-color: #4CD964;
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border-radius:16px;
+    color: #fff;
+    font-family: 'Lato';
+    font-size: 24px;
+    text-decoration: none;
+    margin: 2%;
+}
+
+.login:hover {
+    box-shadow: 0px 0px 2px #777;
+}
+

@@ -1,31 +1,38 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/signup.css">
+</head>
+
 <%= flash_messages %>
-<header>
-  <h2>Log in</h2>
-</header>
+
+<div class="rectangle">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<h2>Login</h2>
   <div class="devise-container">
     <div class="row">
       <div class="form-group">
-        <%= f.label :email %><br />
+        <%= f.label :email, class: "labelField"%><br />
         <%= f.email_field :email, autofocus: true, class: "form-control" %>
       </div>
     </div>
+    <br>
     <div class="row">
       <div class="form-group">
-        <%= f.label :password %><br />
+        <%= f.label :password, class: "labelField"%><br />
         <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
       </div>
     </div>
+    <br>
     <div class="row">
       <div class="form-group actions">
         <% if devise_mapping.rememberable? -%>
-          <div class="field pull-left">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
+          <div class="field-pull-left">
+          <%= f.check_box :remember_me, class:"checkbox" %> 
+          <%= f.label :remember_me, {class: "checkbox inline"}  %>
           </div>
         <% end -%>
       </div>
     </div>
   </div>
-  <%= f.submit "Log in", class: "btn btn-lg btn-primary" %>
+  <%= f.submit "Log in", class: "login" %>
+  </div>
 <% end %>
