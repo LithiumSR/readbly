@@ -1,4 +1,4 @@
-#Readbly
+#Readbly [![Build Status](https://travis-ci.org/LithiumSR/readbly.svg?branch=master)](https://travis-ci.org/LithiumSR/readbly)
 Readbly is a prototype of library management system developed as part of the final exam of the lassi (Laboratorio di Applicazioni Software e Sicurezza Informatica) lab at Sapienza University.
 This project is developed in Ruby using the Rails framework (5.2.0).
 
