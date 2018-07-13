@@ -4,9 +4,7 @@ RSpec.describe ReservationsController, type: :controller do
 
   def get_attributes(obj)
     attr = obj.attributes
-    pp "OLD: #{attr['updated_at']}"
     attr['updated_at'] = attr['updated_at'].change(:usec => 0)
-    pp "NEW: #{attr['updated_at']}"
     attr['created_at'] = attr['created_at'].change(:usec => 0)
     attr
   end
@@ -559,9 +557,9 @@ RSpec.describe ReservationsController, type: :controller do
       it "shouldn't make any changes to the reservation" do
         book = create(:book)
         res = Reservation.create!(:book_id => book.id, :user_id => subject.current_user.id)
-        old_attr = res.attributes
+        old_attr = get_attributes res
         put :confirm_return, params: {:id => res.id}
-        expect(Reservation.find(res.id).attributes).to eq(old_attr)
+        expect(get_attributes Reservation.find(res.id)).to eq(old_attr)
       end
     end
 
@@ -591,9 +589,9 @@ RSpec.describe ReservationsController, type: :controller do
         res.isReturned = true
         res.returned_date = DateTime.now + 20.day
         res.save
-        old_attr = res.attributes
+        old_attr = get_attributes res
         put :confirm_return, params: {:id => res.id}
-        expect(Reservation.find(res.id).attributes).to eq(old_attr)
+        expect(get_attributes Reservation.find(res.id)).to eq(old_attr)
       end
     end
 
