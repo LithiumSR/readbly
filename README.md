@@ -1,24 +1,42 @@
-# README
+#Readbly
+Readbly is a prototype of library management system developed as part of the final exam of the lassi (Laboratorio di Applicazioni Software e Sicurezza Informatica) lab at Sapienza University.
+This project is developed in Ruby using the Rails framework (5.2.0).
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Features
+Readbly comes with support for 3 types of user:
+- (Basic) user
+- Operator
+- Admin
 
-Things you may want to cover:
+The basic user is able to:
+- Place a reservation
+- View the books collection
+- Delete his own pending reservations 
+- Manage his account
+- Postpone his own active reservations up to 1 time
 
-* Ruby version
+The operator is able to:
+- Do all the things that a normal user can do
+- Create new books
+- Edit books
+- Confirm pending reservations
+- Confirm the return of a loan
+- Delete the pending reservations of another user
+- Postpone the active reservations (loans) of another user up to 3 times
 
-* System dependencies
+The admin is able to:
+- Do all the things that an operator can do
+- Manage the users
+- Delete books
+- Delete reservations/loans
+- Postpone active reservations (loans) an infinite number of times
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##How to setup 
+1.  ``git clone`` this repo 
+2.  Open the terminal in the project path and use `bundle install`
+3. Setup the database.yml with your credentials and use `rails db:migrate` and `rails db:seed`
+4. Start the server with `rails server`
+5. Login using the default accounts:
+	- email: "admin@gmail.com" , password : "password1234"
+	-  email: "operator@gmail.com" , password : "password1234"
+	-  email: "user@gmail.com" , password : "password1234"
