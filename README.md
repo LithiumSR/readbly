@@ -1,8 +1,10 @@
-#Readbly [![Build Status](https://travis-ci.org/LithiumSR/readbly.svg?branch=master)](https://travis-ci.org/LithiumSR/readbly)
+# Readbly  [![Build Status](https://travis-ci.org/LithiumSR/readbly.svg?branch=master)](https://travis-ci.org/LithiumSR/readbly)
+
 Readbly is a prototype of library management system developed as part of the final exam of the lassi (Laboratorio di Applicazioni Software e Sicurezza Informatica) lab at Sapienza University.
 This project is developed in Ruby using the Rails framework (5.2.0).
 
-##Features
+## Features
+
 Readbly comes with support for 3 types of user:
 - (Basic) user
 - Operator
@@ -31,7 +33,8 @@ The admin is able to:
 - Delete reservations/loans
 - Postpone active reservations (loans) an infinite number of times
 
-##How to setup 
+## How to setup 
+
 1.  ``git clone`` this repo 
 2.  Open the terminal in the project path and use `bundle install`
 3. Setup the database.yml with your credentials and use `rails db:migrate` and `rails db:seed`
