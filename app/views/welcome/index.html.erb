@@ -5,7 +5,7 @@
     <title>
       <%= yield :title %>
     </title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    <%= stylesheet_link_tag '/stylesheets/main.css', media: 'all', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
     <script type="text/javascript" src="javascript/home/app_min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

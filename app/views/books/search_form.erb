@@ -2,7 +2,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="/javascript/books/book_search_form.js"></script>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/book.css">
+    <%= stylesheet_link_tag "/stylesheets/book.css", media: 'all', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
 <body onload="initializeBookStorage()">
