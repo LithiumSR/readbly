@@ -7,6 +7,13 @@ class Book < ApplicationRecord
   validates :isbn, presence: true
   validates :released_at, :numericality => { :greater_than_or_equal_to => 0 }, presence: true
   validate :check_length
+  after_create :assign_default_values
+
+  def assign_default_values
+    self.isDisabled = false
+    self.save
+  end
+
   def check_length
     if isbn.nil?
       errors.add(:Isbn, "Can't be left blank") and return

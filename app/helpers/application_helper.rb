@@ -87,4 +87,18 @@ module ApplicationHelper
     end
     return true
   end
+
+  def isAvaiable(book)
+    if book.isDisabled
+      return false
+    end
+    res = Reservation.all.select {|i| i.book_id==book.id}
+    res.each do |item|
+      if !item.isLoan and !item.isReturned
+        return false
+      end
+    end
+    return true
+  end
+
 end

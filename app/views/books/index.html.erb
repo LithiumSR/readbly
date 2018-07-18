@@ -19,6 +19,7 @@
       <th>Overview</th>
       <th>Isbn</th>
       <th>Release year</th>
+      <th>Avaiable</th>
     </tr>
   </thead>
 
@@ -31,6 +32,7 @@
         <td><%= book.overview %></td>
         <td><%= book.isbn %></td>
         <td><%= book.released_at %></td>
+        <td><%= isAvaiable(book) %></td>
         <% if isOperator(current_user) or isAdmin(current_user) %>
           <td><%= link_to 'Show', book %></td>
           <td><%= link_to 'Edit', edit_book_path(book) %></td>
