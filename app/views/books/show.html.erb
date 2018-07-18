@@ -36,14 +36,21 @@
   <%= @book.coverlink %>
 </p>
 
+<% if isOperator(current_user) or isAdmin(current_user) %>
+  <p>
+    <strong>Disable:</strong>
+    <%= @book.isDisabled %>
+  </p>
+<% end %>
+
 <%= link_to 'Show reservations and loans',book_reservations_url(:book_id => @book.id), method: :get%>
   <br/>
   <% if isOperator(current_user) or isAdmin(current_user) %>
     <%= link_to 'Edit', edit_book_path(@book) %> |
-      <%= link_to 'Back', books_path %>
-        <% end %>
-          <% if isAdmin(current_user) %>
-            <td>
-              <%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </td>
-            <% end %>
+    <%= link_to 'Back', books_path %> |
+    <%= link_to 'Disable', book_disable_url({:id => @book.id }.merge(params )), method: :put, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+  <% if isAdmin(current_user) %>
+    |
+    <%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>

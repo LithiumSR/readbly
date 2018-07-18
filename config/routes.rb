@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/book/search', to: 'books#search_form', as: 'search_form'
   get '/book/results', to: 'books#results_search', as: 'search_results'
+  put '/book/disable', to: 'books#disable', as: 'book_disable'
   resources :books
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :book

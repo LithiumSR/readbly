@@ -32,7 +32,9 @@ book3 = Book.create!("title" => 'Harry Potter 3', "author" => "JK", "publisher" 
 Book.create!("title" => 'Harry Potter 4', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 4", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
 Book.create!("title" => 'Harry Potter 5', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 5", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
 Book.create!("title" => 'Harry Potter 6', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 6", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
-Book.create!("title" => 'Harry Potter 7', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 7", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
+book7 = Book.create!("title" => 'Harry Potter 7', "author" => "JK", "publisher" => "Einaudi","overview" => "Overview 7", "isbn" => "1234567891", "updated_at"=> DateTime.now, "released_at" => 2005)
+book7.isDisabled = true
+book7.save
 Reservation.create!("isReturned" => false, "isLoan"=> false, "user_id"=>user1.id, "book_id"=>book1.id)
 res2 =Reservation.create!("isReturned" => false, "isLoan"=> false, "user_id"=>user1.id, "book_id"=>book3.id)
 res2.isLoan = true;
