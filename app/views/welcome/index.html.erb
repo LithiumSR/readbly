@@ -65,7 +65,7 @@
 <div class="float">
 <div class="dropdown-menu", id="dropdown-button">
   <span tabindex="0">
-    <img src="images/settings.svg" height="32" width="32" class="my-float" id="home"/></span>
+    <%= image_tag("/images/settings.svg", :height => "32", :width => "32", :class => "my-float", :id => "home") %></span>
   <div tabindex="0"></div>
   <ul>
     <% if isAdmin(current_user) or isOperator(current_user) %><li><a href="books/new" onclick="sampleMenu(this)", class="menu">Add a new book</a></li>
