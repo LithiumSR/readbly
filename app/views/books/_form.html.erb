@@ -1,8 +1,7 @@
 <% content_for :for_head do %>
     <script src="https://cdn.jsdelivr.net/npm/kotlin@1.2.51/kotlin.min.js"></script>
-    <script src="/javascript/books/bookinfo_kotlin.js"></script>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/book.css">
-    <%= stylesheet_link_tag    '/stylesheets/book.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag '/javascript/books/bookinfo_kotlin.js', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag '/stylesheets/book.css', media: 'all', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
 
