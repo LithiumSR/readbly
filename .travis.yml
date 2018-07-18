@@ -1,13 +1,12 @@
 language: ruby
+rvm:
+  - 2.5.1
 cache:
 - bundler
 env:
 - READBLY_PWD=readbly_travis
 before_install:
-- gem update --system
-- gem --version
-- gem install bundler
-- gem update bundler
+- gem install bundler -v 1.16.2
 before_script:
 - cp ./.travis.database.yml ./config/database.yml
 - psql -c "CREATE USER readbly_travis WITH PASSWORD 'readbly_travis';" -U postgres
