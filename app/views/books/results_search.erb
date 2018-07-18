@@ -28,7 +28,7 @@
     <% if isAvaiable=isAvaiable(book) %>
     <% end %>
       <tr>
-        <td><%= book.title %></td>
+        <td><%= link_to book.title, book %></td>
         <td><%= book.author %></td>
         <td><%= book.publisher %></td>
         <td><%= book.overview %></td>
