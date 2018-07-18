@@ -30,7 +30,7 @@ class BooksController < ApplicationController
       if !ApplicationHelper.isOperator(current_user) and !ApplicationHelper.isAdmin(current_user)
         return @books = Array(Book.all.select{|i| i.isbn == params[:isbn].to_s.strip and !i.isDisabled}).paginate(page: params[:page], per_page: 15)
       else
-        return @books = Array(Book.all.select{|i| i.isbn == params[:isbn].to_s.strip}).paginate(page: params[:page], per_page: 15)
+        return @books = Array(Book.all.select{|i| i.isbn == params[:isbn].to_s.strip}.sort_by{ |m| m.title.downcase }).paginate(page: params[:page], per_page: 15)
       end
     elsif title_valid or author_valid or year_valid
         if !ApplicationHelper.isOperator(current_user) and !ApplicationHelper.isAdmin(current_user)
@@ -38,7 +38,7 @@ class BooksController < ApplicationController
         else
           @search = Book.ransack(title_cont: params[:title], author_cont: params[:author], released_at_eq: params[:released_at])
         end
-        return @books = Array(@search.result).paginate(page: params[:page], per_page: 15)
+        return @books = Array(@search.result).sort_by{ |m| m.title.downcase }.paginate(page: params[:page], per_page: 15)
     else
       redirect_back fallback_location: root_path, alert: 'Invalid search request' + title_valid.to_s + author_valid.to_s + year_valid.to_s and return
     end
@@ -114,6 +114,7 @@ class BooksController < ApplicationController
         format.html { redirect_to books_url, notice: 'Book was successfully disabled.' }
         format.json { head :no_content }
       end
+      return
     end
     respond_to do |format|
       format.html { redirect_to books_url, notice: 'Book was already disabled.' }
@@ -130,6 +131,7 @@ class BooksController < ApplicationController
         format.html { redirect_to books_url, notice: 'Book was successfully enabled.' }
         format.json { head :no_content }
       end
+      return
     end
     respond_to do |format|
       format.html { redirect_to books_url, notice: 'Book was already enabled.' }
