@@ -78,7 +78,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   #cucumber for testing
-  gem 'cucumber'
+  gem 'cucumber', '~> 3.1', '>= 3.1.2'
   gem 'cucumber-rails', require: false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
