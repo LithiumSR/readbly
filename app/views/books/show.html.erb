@@ -45,12 +45,6 @@
     </p>
   </div>
 <div class="footer">
-<% if isOperator(current_user) or isAdmin(current_user) %>
-  <p>
-    <strong>Disabled:</strong>
-    <%= @book.isDisabled %>
-  </p>
-<% end %>
 <%= link_to 'Show reservations and loans',book_reservations_url(:book_id => @book.id), method: :get%>
   <br/>
   <% if isOperator(current_user) or isAdmin(current_user) %>
