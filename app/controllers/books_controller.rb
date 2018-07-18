@@ -100,10 +100,32 @@ class BooksController < ApplicationController
 
   def disable
     @book = Book.find(params[:id])
-    @book.isDisabled=true
-    @book.save
+    if (!@book.isDisabled)
+      @book.isDisabled=true
+      @book.save
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: 'Book was successfully disabled.' }
+        format.json { head :no_content }
+      end
+    end
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to books_url, notice: 'Book was already disabled.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def enable
+    @book = Book.find(params[:id])
+    if (@book.isDisabled)
+      @book.isDisabled=false
+      @book.save
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: 'Book was successfully enabled.' }
+        format.json { head :no_content }
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to books_url, notice: 'Book was already enabled.' }
       format.json { head :no_content }
     end
   end

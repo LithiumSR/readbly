@@ -38,7 +38,7 @@
 
 <% if isOperator(current_user) or isAdmin(current_user) %>
   <p>
-    <strong>Disable:</strong>
+    <strong>Disabled:</strong>
     <%= @book.isDisabled %>
   </p>
 <% end %>
@@ -48,6 +48,11 @@
   <% if isOperator(current_user) or isAdmin(current_user) %>
     <%= link_to 'Edit', edit_book_path(@book) %> |
     <%= link_to 'Back', books_path %> |
+  <% if @book.isDisabled %>
+    <%= link_to "Enable", {:controller => :books, :action => :enable, :id => @book.id}, :method => :put%>
+    <% else %>
+    <%= link_to "Disable", {:controller => :books, :action => :disable, :id => @book.id}, :method => :put%>
+  <% end %>
   <% end %>
   <% if isAdmin(current_user) %>
     |
