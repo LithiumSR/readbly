@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Eczar');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+.container {
+    margin: 2.4%;
+    display: grid;
+    grid-gap: 16ex;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      "header header header header"
+      "aside main main main"
+      "aside main main main"
+      "aside main main main"
+      "aside main main main"
+      "footer footer footer footer";
+    height: calc(80vh - 8px);
+}
+
+.header {
+    grid-area: header;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 68px;
+    color: #000000;
+}
+
+.aside {
+    grid-area: aside;
+}
+
+img {
+    width: 100%;
+    box-shadow: 4px 4px 16px 5px rgba(0,0,0,0.50);
+    border-radius: 8px;
+}
+
+.main {
+    grid-area: main;
+}
+.main p {
+    font-family: 'Eczar', serif !important;
+    font-size: 32px;
+    color: #000000;
+}
+
+.main p#title {
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 0px;
+    margin-bottom: 48px;
+}
+
+.footer {
+    grid-area: footer;
+}

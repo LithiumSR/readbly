@@ -1,48 +1,56 @@
-<p id="notice">
-  <%= notice %>
-</p>
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+<% content_for :for_head do %>
+    <%= stylesheet_link_tag    '/stylesheets/show.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
 
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
 
-<p>
-  <strong>Publisher:</strong>
-  <%= @book.publisher %>
-</p>
+<div class="container">
 
-<p>
-  <strong>Overview:</strong>
-  <%= @book.overview %>
-</p>
+  <div class="header">
+    <%= current_user.email%>
+  </div>
 
-<p>
-  <strong>Isbn:</strong>
-  <%= @book.isbn %>
-</p>
+  <div class="aside">
+  <% if @book.coverlink %>
+      <%= image_tag(@book.coverlink, :alt => "Book Cover") %>
+  <% else %>
+    <%= image_tag("https://pre00.deviantart.net/490c/th/pre/i/2016/067/9/c/dead_link_by_lessthanxero-d9ug6qu.jpg", :alt => "Book Cover") %>
+  <% end %>
+  </div>
 
-<p>
-  <strong>Released at:</strong>
-  <%= @book.released_at %>
-</p>
+  <div class="main">
 
-<p>
-  <strong>Coverlink:</strong>
-  <%= @book.coverlink %>
-</p>
-
+    <p id="title">
+      <%= @book.title %>
+    </p>
+    <p>
+      <strong>Written By </strong>
+      <%= @book.author %>
+    </p>
+    </br>
+    <p>
+      <strong>Publisher:</strong>
+      <%= @book.publisher %>
+    </p>
+    <p>
+      <strong>Overview:</strong>
+      <%= @book.overview %>
+    </p>
+    <p>
+      <strong>Isbn:</strong>
+      <%= @book.isbn %>
+    </p>
+    <p>
+      <strong>Released at:</strong>
+      <%= @book.released_at %>
+    </p>
+  </div>
+<div class="footer">
 <% if isOperator(current_user) or isAdmin(current_user) %>
   <p>
     <strong>Disabled:</strong>
     <%= @book.isDisabled %>
   </p>
 <% end %>
-
 <%= link_to 'Show reservations and loans',book_reservations_url(:book_id => @book.id), method: :get%>
   <br/>
   <% if isOperator(current_user) or isAdmin(current_user) %>
@@ -55,6 +63,7 @@
   <% end %>
   <% end %>
   <% if isAdmin(current_user) %>
-    |
-    <%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you REALLY sure?' } %>
   <% end %>
+    </div>
+</div>
