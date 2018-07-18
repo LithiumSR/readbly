@@ -4,7 +4,9 @@
     <title>Readbly</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <% if content_for? :for_head %>
+      <%= yield :for_head %>
+    <% end %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>

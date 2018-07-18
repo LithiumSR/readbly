@@ -1,5 +1,10 @@
-<h1>New Book</h1>
+<% content_for :for_head do %>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/book.css">
+<% end %>
 
+<div class="container">
+    <h1 style='line-height:48px;'>New Book</h1>
+</div>
 <%= render 'form', book: @book %>
 
-<%= link_to 'Back', books_path %>
+

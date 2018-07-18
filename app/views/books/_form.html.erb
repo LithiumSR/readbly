@@ -1,56 +1,78 @@
-<script src="https://cdn.jsdelivr.net/npm/kotlin@1.2.51/kotlin.min.js"></script>
-<script src="/javascript/books/bookinfo_kotlin.js"></script>
-
-<%= form_with(model: book, local: true) do |form| %>
-  <% if book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-      <ul>
-      <% book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: 'title' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :author %>
-    <%= form.text_field :author, id: 'author' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :publisher %>
-    <%= form.text_field :publisher, id: 'publisher' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :overview %>
-    <%= form.text_field :overview, id: 'overview' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :isbn %>
-    <%= form.text_field :isbn, id: 'isbn', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57;', maxlength: 13%>
-    <button type="button" id="getinfo" onclick=""> Autocomplete </button>
-  </div>
-
-
-  <div class="field">
-    <%= form.label :released_at %>
-    <%= form.number_field :released_at, min: 0,  id: 'released_at' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :coverlink %>
-    <%= form.text_field :coverlink, id: 'coverlink' %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<% content_for :for_head do %>
+    <script src="https://cdn.jsdelivr.net/npm/kotlin@1.2.51/kotlin.min.js"></script>
+    <script src="/javascript/books/bookinfo_kotlin.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/book.css">
 <% end %>
+
+
+<body>
+    <div class="container" onkeypress="return checkSubmit(event)">
+      <%= form_with(model: book, local: true, name: "bookForm", id:"myBookForm") do |form| %>
+        <% if book.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+            <ul>
+            <% book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+              <fieldset class="form-fieldset ui-input __first" id="firstForm">
+                <%= form.text_field :title, id: 'title' %>
+                <label for="title">
+                    <span data-text="Title (Required)">Title</span>
+                </label>
+            </fieldset>
+
+            <fieldset class="form-fieldset ui-input __second">
+                <%= form.text_field :author, id: 'author' %>
+                <label for="author">
+                  <span data-text="Author">Author</span>
+                </label>
+            </fieldset>
+
+
+            <fieldset class="form-fieldset ui-input __second">
+                <%= form.text_field :publisher, id: 'publisher' %>
+                <label for="author">
+                  <span data-text="Publisher">Publisher</span>
+                </label>
+            </fieldset>
+
+            <fieldset class="form-fieldset ui-input __second">
+                <%= form.text_field :overview, id: 'overview' %>
+                <label for="author">
+                  <span data-text="Overview">Overview</span>
+                </label>
+            </fieldset>
+
+                <fieldset class="form-fieldset ui-input __third">
+                <%= form.text_field :isbn, id: 'isbn', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57;', maxlength: 13%>
+                <label for="isbn">
+                    <span data-text="ISBN">ISBN</span>
+                </label>
+                <button type="button" class="btn" id="getinfo" onclick=""> Autocomplete </button>
+            </fieldset>
+
+
+                    <fieldset class="form-fieldset ui-input __fourth">
+                <%= form.number_field :released_at, min: 0,  id: 'released_at' %>
+                <label for="released_at">
+                    <span data-text="Release Year" >Release Year</span>
+                </label>
+            </fieldset>
+
+                    <fieldset class="form-fieldset ui-input __fourth">
+                <%= form.text_field :coverlink, id: 'coverlink' %>
+                <label for="released_at">
+                    <span data-text="Coverlink" >Coverlink</span>
+                </label>
+            </fieldset>
+        <div class="actions">
+          <%= form.submit  :class => 'btn', :id => 'search_button'%>
+        </div>
+      <% end %>
+
+  </div>
+</body>
