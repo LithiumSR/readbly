@@ -9,9 +9,9 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     if ApplicationHelper.isAdmin(current_user) or ApplicationHelper.isAdmin(current_user)
-      @books = Book.all.paginate(page: params[:page], per_page: 15)
+      @books = Book.all.sort_by{ |m| m.title.downcase }.paginate(page: params[:page], per_page: 15)
     else
-      @books = Book.all.select{|i| !i.isDisabled}.paginate(page: params[:page], per_page: 15)
+      @books = Book.all.select{|i| !i.isDisabled}.sort_by{ |m| m.title.downcase }.paginate(page: params[:page], per_page: 15)
     end
   end
 
@@ -47,6 +47,13 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    if @book.isDisabled and !ApplicationHelper.isOperator(current_user) and !ApplicationHelper.isAdmin(current_user)
+      respond_to do |format|
+        format.html { redirect_to books_url, alert: 'Insufficient permissions' }
+        format.json { head :no_content }
+      end
+    end
+
   end
 
   # GET /books/new
