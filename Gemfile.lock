@@ -331,6 +331,7 @@ DEPENDENCIES
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  cucumber
   cucumber-rails
   database_cleaner
   devise
