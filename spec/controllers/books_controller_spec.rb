@@ -2,6 +2,17 @@ require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
 
+  def get_attributes(obj)
+    attr = obj.attributes
+    if(!attr['updated_at'].nil?)
+      attr['updated_at'] = attr['updated_at'].change(:usec => 0)
+    end
+    if(!attr['created_at'].nil?)
+      attr['created_at'] = attr['created_at'].change(:usec => 0)
+    end
+    attr
+  end
+
   describe "GET #index " do
     context "when logged in"  do
       login_user
@@ -156,5 +167,150 @@ RSpec.describe BooksController, type: :controller do
       end
     end
   end
+
+  describe "PUT #enable" do
+    context "as an operator with a valid and disabled book id" do
+      login_operator
+      it "book property isDisabled should not change" do
+        book = create(:book)
+        book.isDisabled=true;
+        book.save
+        put :enable, params: {:id => book.id}
+        expect(book.isDisabled).to_not eq(book.reload.isDisabled)
+      end
+      it "book property isDisabled should change from true to false" do
+        book = create(:book)
+        book.isDisabled=true;
+        book.save
+        put :enable, params: {:id => book.id}
+        expect((book.isDisabled==true and book.reload.isDisabled==false)).to eq(true)
+      end
+    end
+
+    context "as an admin with a valid and disabled book id" do
+      login_admin
+      it "book property isDisabled shouldn't change" do
+        book = create(:book)
+        book.isDisabled=true;
+        book.save
+        put :enable, params: {:id => book.id}
+        expect(book.isDisabled).to_not eq(book.reload.isDisabled)
+      end
+      it "book property isDisabled should change from true to false" do
+        book = create(:book)
+        book.isDisabled=true;
+        book.save
+        put :enable, params: {:id => book.id}
+        expect((book.isDisabled==true and book.reload.isDisabled==false)).to eq(true)
+      end
+    end
+
+    context "as a basic user with a valid and disabled book id" do
+      login_user
+      it "book property isDisabled shouldn't change" do
+        book = create(:book)
+        book.isDisabled=true
+        book.save
+        put :enable, params: {:id => book.id}
+        expect(!book.isDisabled).to eq(!book.reload.isDisabled)
+      end
+    end
+
+    context "as a basic user with a valid and disabled book id" do
+      it "book properties shouldn't change" do
+        book = create(:book)
+        book.isDisabled=true
+        book.save
+        attr = get_attributes book
+        put :enable, params: {:id => book.id}
+        expect(attr).to eq(get_attributes book.reload)
+      end
+    end
+
+    context "as an admin with a valid and enabled book id" do
+      login_admin
+      it "book properties shouldn't change" do
+        book = create(:book)
+        attr = get_attributes book
+        put :enable, params: {:id => book.id}
+        expect(attr).to eq(get_attributes book.reload)
+      end
+    end
+
+    context "as an admin with an invalid book id" do
+      login_admin
+      it "should raise a RecordNotFound error" do
+        expect{put :disable, params:{:id => -1}}.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+
+  describe "PUT #disable" do
+    context "as an operator with a valid and enabled book id" do
+      login_operator
+      it "book property isDisabled should not change" do
+        book = create(:book)
+        put :disable, params: {:id => book.id}
+        expect(book.isDisabled).to_not eq(book.reload.isDisabled)
+      end
+      it "book property isDisabled should change from false to true" do
+        book = create(:book)
+        put :disable, params: {:id => book.id}
+        expect((book.isDisabled==false and book.reload.isDisabled==true)).to eq(true)
+      end
+    end
+
+    context "as an admin with a valid and enabled book id" do
+      login_admin
+      it "book property isDisabled should change" do
+        book = create(:book)
+        put :disable, params: {:id => book.id}
+        expect(book.isDisabled).to_not eq(book.reload.isDisabled)
+      end
+      it "book property isDisabled should change from false to true" do
+        book = create(:book)
+        put :disable, params: {:id => book.id}
+        expect((book.isDisabled==false and book.reload.isDisabled==true)).to eq(true)
+      end
+    end
+
+    context "as a basic user with a valid and enabled book id" do
+      login_user
+      it "book property isDisabled shouldn't change" do
+        book = create(:book)
+        put :disable, params: {:id => book.id}
+        expect(!book.isDisabled).to eq(!book.reload.isDisabled)
+      end
+    end
+
+    context "as a basic user with a valid and enabled book id" do
+      it "book properties shouldn't change" do
+        book = create(:book)
+        attr = get_attributes book
+        put :disable, params: {:id => book.id}
+        expect(attr).to eq(get_attributes book.reload)
+      end
+    end
+
+    context "as an admin with a valid and disabled book id" do
+      login_admin
+      it "book properties shouldn't change" do
+        book = create(:book)
+        book.isDisabled = true
+        book.save
+        attr = get_attributes book
+        put :disable, params: {:id => book.id}
+        expect(attr).to eq(get_attributes book.reload)
+      end
+    end
+
+    context "as an admin with an invalid book id" do
+      login_admin
+      it "should raise a RecordNotFound error" do
+        expect{put :disable, params:{:id => -1}}.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+
 end
 
