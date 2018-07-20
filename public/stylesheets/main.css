@@ -3,8 +3,13 @@
     font-family: 'Lato', serif;
     font-size: 50px;
     font-weight: 900;
-    display: block;
+    display: flex;
+    align-items:center;
     margin: 0 auto;
+}
+
+#email {
+    padding-left: 8px;
 }
 
 .container {
@@ -160,7 +165,7 @@ a:visited {
     width: 54px;
     height: 54px;
     bottom: 85%;
-    right: 5%;
+    right: 10%;
     border-radius: 50px;
     text-align: center;
     box-shadow: 2px 2px 3px #999;
@@ -180,7 +185,7 @@ a:visited {
     width: 54px;
     height: 54px;
     bottom: 85%;
-    right: 5%;
+    right: 10%;
     border-radius: 50px;
     text-align: center;
 }
@@ -190,8 +195,12 @@ a:visited {
 }
 
 .dropdown-menu>ul {
-    position: absolute;
+    position: relative;
     transition: visibility 0.5s;
+    padding-left: 0;
+    font-family: 'Lato', serif;
+    font-size: 15px;
+    text-align: left;
 }
 
 .dropdown-menu>span,
@@ -202,8 +211,8 @@ a:visited {
 
 ul {
     list-style-type: none;
-    padding-left: 0px;
     line-height: 200%;
+    width:100px;
 }
 
 li {
