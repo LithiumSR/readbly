@@ -4,14 +4,17 @@
     font-size: 16px;
     font-weight: 400;
 }
-a:link {
-    color: black;
-}
-a:visited {
-    color: black;
+
+a {
+    color: #000;
 }
 
+a:visited {
+     color: #363636;
+ }
+
 a:hover {
-    color: white;
-}
+     color: #fff;
+     background-color: #000;
+ }
 
