@@ -10,9 +10,9 @@ class ManagementReservationsController < ApplicationController
 
 
   def my_reservations
-    @active_reservations = Reservation.all.select{|i| !i.isReturned and i.isLoan and i.user_id = current_user.id}.paginate(page: params[:page], per_page: 15)
-    @pending_reservations = Reservation.all.select{|i| !i.isReturned and !i.isLoan and i.user_id = current_user.id}.paginate(page: params[:page], per_page: 15)
-    @completed_reservations = Reservation.all.select{|i| i.isReturned and i.isLoan and i.user_id = current_user.id}.paginate(page: params[:page], per_page: 15)
+    @active_reservations = Reservation.all.select{|i| !i.isReturned and i.isLoan and i.user_id == current_user.id}.paginate(page: params[:page], per_page: 15)
+    @pending_reservations = Reservation.all.select{|i| !i.isReturned and !i.isLoan and i.user_id == current_user.id}.paginate(page: params[:page], per_page: 15)
+    @completed_reservations = Reservation.all.select{|i| i.isReturned and i.isLoan and i.user_id == current_user.id}.paginate(page: params[:page], per_page: 15)
   end
 
   def canManage

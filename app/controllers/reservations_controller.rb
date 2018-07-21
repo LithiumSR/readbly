@@ -32,7 +32,7 @@ class ReservationsController < ApplicationController
       redirect_back fallback_location: root_path, alert: "You don't have the permission to create a reservation for another user!" and return
     end
     Reservation.create!("book_id" => params[:book_id], "user_id" => params[:user_id])
-    redirect_back fallback_location: root_path
+    redirect_back fallback_location: root_path, notice: "Reservation placed successfully"
   end
 
   def confirm_loan
