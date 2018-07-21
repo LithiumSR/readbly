@@ -96,6 +96,8 @@ module ApplicationHelper
     res.each do |item|
       if !item.isLoan and !item.isReturned
         return false
+      elsif item.isLoan and !item.isReturned
+        return false
       end
     end
     return true
