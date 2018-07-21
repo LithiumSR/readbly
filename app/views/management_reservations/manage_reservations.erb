@@ -1,11 +1,11 @@
 <head>
-  <%= stylesheet_link_tag '/stylesheets/table.css', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag '/javascript/manage_users/manage_users.js', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag '/stylesheets/reservations.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag '/stylesheets/table.css', media: 'all', 'data-turbolinks-track': 'reload' %>
   <script>
     function onLoad() {
       var i, tabcontent, tablinks;
@@ -136,12 +136,15 @@
             <td>
               <%= reservation.request_date %>
             </td>
+
+            <% if nearExpirationDate(reservation.expiration_date) %>
+              <td><p style="color:#6e0000;"><%= reservation.expiration_date %></p></td>
+            <% else %><td><%= reservation.expiration_date %></td>
+            <% end %>
             <td>
-              <%= reservation.expiration_date %>
+            <%= reservation.isPostponed.to_s.capitalize%>
             </td>
-            <td>
-              <%= reservation.isPostponed %>
-            </td>
+
             <td>
               <%= button_to 'Postpone Return', postpone_return_url, method: :put, data: { confirm: 'Are you sure?' }, params: {id: reservation.id} %>
             </td>
@@ -188,14 +191,15 @@
             <td>
               <%= reservation.request_date %>
             </td>
-            <td>
-              <%= reservation.expiration_date %>
-            </td>
+            <% if nearExpirationDate(reservation.expiration_date) %>
+              <td><p style="color:#6e0000;"><%= reservation.expiration_date %></p></td>
+            <% else %><td><%= reservation.expiration_date %></td>
+            <% end %>
             <td>
               <%= reservation.returned_date %>
             </td>
             <td>
-              <%= reservation.isPostponed %>
+              <%= reservation.isPostponed.to_s.capitalize%>
             </td>
             <% if isAdmin(current_user)%>
               <td>
