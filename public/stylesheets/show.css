@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Eczar');
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
-.container {
+.container-grid {
     margin: 2.4%;
     display: grid;
     grid-gap: 16ex;
@@ -37,17 +37,20 @@ img {
 .main {
     grid-area: main;
 }
+
 .main p {
     font-family: 'Eczar', serif !important;
-    font-size: 32px;
+    font-size: 28px;
     color: #000000;
+    display: inline-block;
+    line-height: 46px;
 }
 
 .main p#title {
-    font-size: 72px;
+    font-size: 4rem;
     font-weight: 700;
-    line-height: 0px;
-    margin-bottom: 48px;
+    line-height: 56px;
+    overflow-wrap: break-word;
 }
 
 .footer {
