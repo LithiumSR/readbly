@@ -52,7 +52,7 @@
 <div class="footer">
   <%= link_to 'Show reservations and loans',book_reservations_url(:book_id => @book.id), method: :get%>
   <% if isAvaiable(@book) %>
-  | <%= link_to "Place reservation", {:controller => :reservations, :action => :create, :book_id => @book.id, :user_id => current_user.id}, :method => :post%>
+  | <%= link_to "Place reservation",create_reservation_url(:book_id => @book.id, :user_id => current_user.id), method: :post%>
   <% end %>
   <br/>
   <% if isOperator(current_user) or isAdmin(current_user) %>
