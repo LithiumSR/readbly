@@ -68,16 +68,16 @@
     <%= image_tag("/images/settings.svg", :height => "32", :width => "32", :class => "my-float", :id => "home") %></span>
   <div tabindex="0"></div>
   <ul>
-    <% if isAdmin(current_user) or isOperator(current_user) %><li><a href="books/new" onclick="sampleMenu(this)", class="menu">Add a new book</a></li>
+    <% if isAdmin(current_user) or isOperator(current_user) %><li><a href="books/new", class="menu">Add a new book</a></li>
     <% end %>
     <% if isAdmin(current_user) %>
-    <li><a href="/manage_users" onclick="sampleMenu(this)", class = "menu">Manage Users</a></li>
+    <li><a href="/manage_users", class = "menu">Manage Users</a></li>
     <% end %>
     <% if isAdmin(current_user) or isOperator(current_user) %>
-    <li><a href="manage_reservations" onclick="sampleMenu(this)", class="menu">Manage Reservations</a></li>
+    <li><a href="manage_reservations", class="menu">Manage Reservations</a></li>
     <% end %>
-    <%= link_to 'Edit profile', edit_user_registration_path, :onclick => 'sampleMenu(this)', :class => "menu"%>
-    <%= link_to 'Logout', destroy_user_session_path, :onclick => 'sampleMenu(this)', method: :delete, :class => "menu"%>
+    <%= link_to 'Edit profile', edit_user_registration_path, :class => "menu"%>
+    <%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => "menu"%>
   </ul>
 </div>
 </div>

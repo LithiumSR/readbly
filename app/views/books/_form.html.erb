@@ -6,7 +6,7 @@
 
 
 <body>
-    <div class="container" onkeypress="return checkSubmit(event)">
+    <div class="container">
       <%= form_with(model: book, local: true, name: "bookForm", id:"myBookForm") do |form| %>
         <% if book.errors.any? %>
           <div id="error_explanation">

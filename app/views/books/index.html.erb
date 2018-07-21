@@ -2,11 +2,10 @@
   <%= stylesheet_link_tag '/stylesheets/table.css', media: 'all', 'data-turbolinks-track': 'reload' %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <% end %>
 
-<p id="notice"><%= notice %></p>
 <div class="container">
 <h1>Books</h1>
 <table class="table table-curved">
@@ -15,7 +14,6 @@
       <th>Title</th>
       <th>Author</th>
       <th>Publisher</th>
-      <th>Overview</th>
       <th>Isbn</th>
       <th>Release year</th>
       <th>Avaiable</th>
@@ -28,7 +26,6 @@
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= book.publisher %></td>
-        <td><%= book.overview %></td>
         <td><%= book.isbn %></td>
         <td><%= book.released_at %></td>
         <td><%= isAvaiable(book) %></td>

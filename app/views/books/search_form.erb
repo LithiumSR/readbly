@@ -6,7 +6,7 @@
 <% end %>
 
 <body onload="initializeBookStorage()">
-    <div class="container" onkeypress="return checkSubmit(event)">
+    <div class="container">
         <h1>Find a book</h1>
         <%= form_with url: search_results_url , name: "bookForm", id:"myBookForm", method: :get, :html => { :onsubmit => "return addBookStorage()" }, local: true do |form| %>
             <fieldset class="form-fieldset ui-input __first" id="firstForm">
