@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :reservations
+  has_many :reservations, :dependent => :delete_all
   after_create :assign_default_role
   rolify
   # Include default devise modules. Others available are:

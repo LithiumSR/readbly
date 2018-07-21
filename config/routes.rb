@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/book_api', to: 'api#get_info'
   get '/manage_users', to: 'management_users#manage_users'
   post '/users/change_role', to: 'management_users#change_role', as:'change_role'
+  delete '/users/destroy', to: 'management_users#destroy', as:'user_destroy'
   get '/manage_reservations', to: 'management_reservations#manage_reservations'
   get '/my_reservations', to: 'management_reservations#my_reservations'
   get '/reservation', to: 'reservations#book_reservations', as: 'book_reservations'

@@ -44,6 +44,7 @@
                 <%= f.submit "Change",  :disable_with => "Changing...", :class => 'change' %>
                   <% end %>
           </td>
+          <td><%= button_to 'Delete', user_destroy_url, method: :delete, data: { confirm: 'Are you sure?' }, params: {id: user.id} %></td>
           </tr>
           <% end %>
       </tbody>

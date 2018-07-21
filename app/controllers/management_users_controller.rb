@@ -17,7 +17,15 @@ class ManagementUsersController < ApplicationController
       user.remove_role(role.downcase)
     end
     user.add_role(newrole.downcase)
-    redirect_to '/manage_users' and return
+    redirect_to '/manage_users', notice: "Role changed successfully"
+  end
+
+
+  def destroy
+    id = params[:id]
+    usr = User.find_by(id: id)
+    usr.destroy
+    redirect_to '/manage_users', notice: "User deleted successfully"
   end
 
   def canManage
