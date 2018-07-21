@@ -23,6 +23,7 @@ deploy:
   run: 
   -  gem install bundler
   -  bundle exec rake db:migrate
+  -  rake db:seed
   on:
     repo: LithiumSR/readbly
     branch: master
