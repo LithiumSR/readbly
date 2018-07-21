@@ -77,4 +77,54 @@ RSpec.describe ManagementUsersController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy " do
+    context "as an admin with valid user.id"  do
+      login_admin
+      it "should delete the user" do
+        user = create(:user)
+        delete :destroy, params: {:id =>  user.id}
+        expect(User.find_by(:id => user.id)).to eq(nil)
+      end
+    end
+
+    context "as an operator with valid user.id"  do
+      login_operator
+      it "shouldn't delete the user" do
+        user = create(:user)
+        delete :destroy, params: {:id =>  user.id}
+        expect(User.find_by(:id => user.id)).to_not eq(nil)
+      end
+    end
+
+    context "as a basic user with valid user.id"  do
+      login_user
+      it "shouldn't delete the user" do
+        user = create(:user)
+        delete :destroy, params: {:id =>  user.id}
+        expect(User.find_by(:id => user.id)).to_not eq(nil)
+      end
+    end
+
+    context "as a not signed-in user with valid user.id"  do
+      it "should redirect to the sign-in page" do
+        user = create(:user)
+        delete :destroy, params: {:id =>  user.id}
+        assert_redirected_to user_session_url
+      end
+
+      it "user shouldn't be deleted" do
+        user = create(:user)
+        delete :destroy, params: {:id =>  user.id}
+        expect(User.find_by(:id => user.id)).to_not eq(nil)
+      end
+    end
+
+    context "as an admin with a non existent user.id"  do
+      login_admin
+      it "should raise an ActiveRecord::RecordNotFound error" do
+        expect{delete :destroy, params: {:id =>  -1}}.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end
