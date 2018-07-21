@@ -4,8 +4,12 @@ RSpec.describe ManagementUsersController, type: :controller do
 
   def get_attributes(obj)
     attr = obj.attributes
-    attr['updated_at'] = attr['updated_at'].change(:usec => 0)
-    attr['created_at'] = attr['created_at'].change(:usec => 0)
+    if(!attr['updated_at'].nil?)
+      attr['updated_at'] = attr['updated_at'].change(:usec => 0)
+    end
+    if(!attr['created_at'].nil?)
+      attr['created_at'] = attr['created_at'].change(:usec => 0)
+    end
     attr
   end
 
