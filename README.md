@@ -40,6 +40,6 @@ The admin is able to:
 3. Setup the database.yml with your credentials and use `rails db:migrate` and `rails db:seed`
 4. Start the server with `rails server`
 5. Login using the default accounts:
-	- email: "admin@gmail.com" , password : "password1234"
-	-  email: "operator@gmail.com" , password : "password1234"
-	-  email: "user@gmail.com" , password : "password1234"
+	- email: "admin@readbly.test" , password : "password1234"
+	-  email: "operator@readbly.test" , password : "password1234"
+	-  email: "user@readbly.test" , password : "password1234"
