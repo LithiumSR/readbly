@@ -1,4 +1,4 @@
-<head>
+<% content_for :for_head do %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= yield :meta %>
     <meta name="robots" content="index,follow">
@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag "/stylesheets/welcome.css", media: 'all', 'data-turbolinks-track': 'reload' %>
-</head>
+<% end %>
 
 <body class="home">
   <p class="title">

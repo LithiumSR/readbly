@@ -1,4 +1,4 @@
-<head>
+<% content_for :for_head do %>
   <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js', 'data-turbolinks-track': 'reload' %>
@@ -50,7 +50,7 @@
       evt.currentTarget.className += " active";
     }
   </script>
-</head>
+<% end %>
 
 <body onload="onLoad();">
   <div class="container">
