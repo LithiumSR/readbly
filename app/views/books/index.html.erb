@@ -28,7 +28,19 @@
         <td><%= book.publisher %></td>
         <td><%= book.isbn %></td>
         <td><%= book.released_at %></td>
-        <td><%= isAvaiable(book) %></td>
+        <% if isAvaiable(book) %>
+          <td>
+            <p style="color:#005407;">
+              True
+            </p>
+          </td>
+        <% else %>
+          <td>
+            <p style="color:#6e0000;">
+              False
+            </p>
+          </td>
+        <% end %>
         <% if isOperator(current_user) or isAdmin(current_user) %>
           <td><%= link_to 'Show', book %></td>
           <td><%= link_to 'Edit', edit_book_path(book) %></td>
