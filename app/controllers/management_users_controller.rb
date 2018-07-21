@@ -23,8 +23,9 @@ class ManagementUsersController < ApplicationController
 
   def destroy
     id = params[:id]
-    usr = User.find_by(id: id)
-    usr.destroy
+    user = User.find_by(id: id)
+    raise ActiveRecord::RecordNotFound, "Can't find the ActiveRecord for the user" unless !user.nil?
+    user.destroy
     redirect_to '/manage_users', notice: "User deleted successfully"
   end
 
