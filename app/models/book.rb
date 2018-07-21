@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  has_many :reservations
+  has_many :reservations, :dependent => :delete_all
   validates :title, presence: true
   validates :author, presence: true
   validates :publisher, presence: true
