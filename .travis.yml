@@ -23,6 +23,8 @@ deploy:
   run: 
   -  gem install bundler
   -  bundle exec rake db:migrate
+  -  rm -f ./db/seeds.rb
+  -  cp ./db/heroku_seeds.rb ./db/seeds.rb
   -  rake db:seed
   on:
     repo: LithiumSR/readbly
