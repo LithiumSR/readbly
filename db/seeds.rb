@@ -13,17 +13,17 @@ Reservation.delete_all
 User.delete_all
 Book.delete_all
 user1 = User.create!(email: 'admin@readbly.test',
-                    password: 'password1234',
-                    password_confirmation: 'password1234')
+                     password: 'password1234',
+                     password_confirmation: 'password1234')
 user1.remove_role(:user)
 user1.add_role(:admin)
 user2 = User.create!(email: 'client@readbly.test',
-                    password: 'password1234',
-                    password_confirmation: 'password1234')
+                     password: 'password1234',
+                     password_confirmation: 'password1234')
 user2.add_role(:user)
 user3 = User.create!(email: 'operator@readbly.test',
-                    password: 'password1234',
-                    password_confirmation: 'password1234')
+                     password: 'password1234',
+                     password_confirmation: 'password1234')
 user3.remove_role(:user)
 user3.add_role(:operator)
 Book.create!([
@@ -34,21 +34,3 @@ Book.create!([
                  {title: "Harry Potter and the Prisoner of Azkaban", author: "J.K. Rowling", publisher: "Pottermore", overview: "\"'Welcome to the Knight Bus, emergency transport for the stranded witch or wizard. Just stick out your wand hand, step on board and we can take you anywhere you want to go.'\" When the Knight Bus crashes through the darkness and screeches to a halt in front of him, it's the start of another far from ordinary year at Hogwarts for Harry Potter. Sirius Black, escaped mass-murderer and follower of Lord Voldemort, is on the run - and they say he is coming after Harry. In his first ever Divination class, Professor Trelawney sees an omen of death in Harry's tea leaves... But perhaps most terrifying of all are the Dementors patrolling the school grounds, with their soul-sucking kiss...", isbn: "9781781100233", coverlink: "https://books.google.com/books/content?id=wHlDzHnt6x0C&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api", released_at: 2015, isDisabled: false},
                  {title: "Harry Potter and the Half-Blood Prince", author: "J. K. Rowling", publisher: "Bloomsbury Publishing", overview: "When Dumbledore arrives at Privet Drive one summer night to collect Harry Potter, his wand hand is blackened and shrivelled, but he does not reveal why. Secrets and suspicion are spreading through the wizarding world, and Hogwarts itself is not safe. Harry is convinced that Malfoy bears the Dark Mark: there is a Death Eater amongst them. Harry will need powerful magic and true friends as he explores Voldemort's darkest secrets, and Dumbledore prepares him to face his destiny. These new editions of the classic and internationally bestselling, multi-award-winning series feature instantly pick-up-able new jackets by Jonny Duddle, with huge child appeal, to bring Harry Potter to the next generation of readers. It's time to PASS THE MAGIC ON .", isbn: "9781408855706", coverlink: "https://books.google.com/books/content?id=bZnHBAAAQBAJ&printsec=frontcover&img=1&zoom=0&source=gbs_api", released_at: 2014, isDisabled: false}
              ])
-book1 = Book.find_by_isbn(9781781100226)
-book2 = Book.find_by_isbn(9781408855683)
-book3 = Book.find_by_isbn(9781408855706)
-Reservation.create!([
-                        {request_date: DateTime.now, expiration_date: nil, isReturned: false, isLoan: false, user_id: user2.id, book_id: book1.id, isPostponed: false, return_date: nil, postpone_counter: 0},
-                        {request_date: "2018-07-21", expiration_date: nil, isReturned: false, isLoan: false, user_id: user2.id, book_id: book2.id, isPostponed: false, return_date: nil, postpone_counter: 1},
-                        {request_date: DateTime.now - 15.day, expiration_date: DateTime.now - 15.day, isReturned: false, isLoan: true, user_id: user2.id, book_id: book3.id, isPostponed: true, return_date: nil, postpone_counter: 2}
-                    ])
-res2 = Reservation.find_by(:user_id => user2.id, :book_id => book2.id)
-res2.isReturned = true
-res2.isLoan = true
-res2.expiration_date = res2.request_date + 1.month
-res2.return_date = res2.request_date + 15.day
-res2.save
-res3 = Reservation.find_by(:user_id => user2.id, :book_id => book3.id)
-res3.isLoan = true
-res3.expiration_date = res3.request_date + 1.month
-res3.save
