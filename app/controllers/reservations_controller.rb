@@ -50,7 +50,7 @@ class ReservationsController < ApplicationController
     reservation = Reservation.find(params[:id])
     if reservation !=nil and reservation.isLoan and !reservation.isReturned
       reservation.isReturned=true
-      reservation.returned_date=DateTime.now
+      reservation.return_date=DateTime.now
       reservation.save
       redirect_to '/manage_reservations', notice: "Returned registered successfully" and return
     end

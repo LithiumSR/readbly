@@ -424,7 +424,7 @@ RSpec.describe ReservationsController, type: :controller do
         res.isLoan = true
         res.expiration_date = DateTime.now + 1.month
         res.isReturned = true
-        res.returned_date = DateTime.now + 20.day
+        res.return_date = DateTime.now + 20.day
         res.save
         old_attr = get_attributes res
         put :confirm_loan, params: {:id => res.id}
@@ -440,7 +440,7 @@ RSpec.describe ReservationsController, type: :controller do
         res.isLoan = true
         res.expiration_date = DateTime.now + 1.month
         res.isReturned = true
-        res.returned_date = DateTime.now + 20.day
+        res.return_date = DateTime.now + 20.day
         res.save
         old_attr = get_attributes res
         put :confirm_loan, params: {:id => res.id}
@@ -456,7 +456,7 @@ RSpec.describe ReservationsController, type: :controller do
         res.isLoan = true
         res.expiration_date = DateTime.now + 1.month
         res.isReturned = true
-        res.returned_date = DateTime.now + 20.day
+        res.return_date = DateTime.now + 20.day
         res.save
         old_attr = get_attributes res
         put :confirm_loan, params: {:id => res.id}
@@ -571,7 +571,7 @@ RSpec.describe ReservationsController, type: :controller do
         res.isLoan = true
         res.expiration_date = DateTime.now + 1.month
         res.isReturned = true
-        res.returned_date = DateTime.now + 20.day
+        res.return_date = DateTime.now + 20.day
         res.save
         old_attr = get_attributes res
         put :confirm_return, params: {:id => res.id}
@@ -587,7 +587,7 @@ RSpec.describe ReservationsController, type: :controller do
         res.isLoan = true
         res.expiration_date = DateTime.now + 1.month
         res.isReturned = true
-        res.returned_date = DateTime.now + 20.day
+        res.return_date = DateTime.now + 20.day
         res.save
         old_attr = get_attributes res
         put :confirm_return, params: {:id => res.id}
@@ -603,7 +603,7 @@ RSpec.describe ReservationsController, type: :controller do
         res.isLoan = true
         res.expiration_date = DateTime.now + 1.month
         res.isReturned = true
-        res.returned_date = DateTime.now + 20.day
+        res.return_date = DateTime.now + 20.day
         res.save
         old_attr = get_attributes res
         put :confirm_return, params: {:id => res.id}
