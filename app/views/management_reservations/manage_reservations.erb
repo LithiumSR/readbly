@@ -136,11 +136,7 @@
             <td>
               <%= reservation.request_date %>
             </td>
-
-            <% if nearExpirationDate(reservation.expiration_date) %>
-              <td><p style="color:#6e0000;"><%= reservation.expiration_date %></p></td>
-            <% else %><td><%= reservation.expiration_date %></td>
-            <% end %>
+            <td><%= reservation.expiration_date %></td>
             <td>
             <%= reservation.isPostponed.to_s.capitalize%>
             </td>
@@ -191,10 +187,7 @@
             <td>
               <%= reservation.request_date %>
             </td>
-            <% if nearExpirationDate(reservation.expiration_date) %>
-              <td><p style="color:#6e0000;"><%= reservation.expiration_date %></p></td>
-            <% else %><td><%= reservation.expiration_date %></td>
-            <% end %>
+            <td><%= reservation.expiration_date %></td>
             <td>
               <%= reservation.return_date %>
             </td>
