@@ -9,10 +9,10 @@ class ReservationsController < ApplicationController
     reservation = Reservation.find(params[:id])
     if reservation!=nil and ApplicationHelper.isAdmin(current_user)
       reservation.delete
-      redirect_back fallback_location: root_path and return
+      redirect_back fallback_location: root_path, notice: "Reservation deleted successfully" and return
     elsif reservation!=nil and !reservation.isLoan and (ApplicationHelper.isOperator(current_user) or (ApplicationHelper.isUser(current_user) and reservation.user_id == current_user.id))
       reservation.delete
-      redirect_back fallback_location: root_path and return
+      redirect_back fallback_location: root_path, notice: "Reservation deleted successfully" and return
     elsif !ApplicationHelper.isAdmin(current_user)
            redirect_to root_path, alert: 'You have no authorization to delete a reservation' and return
     else redirect_back fallback_location: root_path, alert: 'Error when deleting a reservation' and return
@@ -41,7 +41,7 @@ class ReservationsController < ApplicationController
       reservation.isLoan=true
       reservation.expiration_date = DateTime.now.to_date + 1.month
       reservation.save
-      redirect_to '/manage_reservations' and return
+      redirect_to '/manage_reservations', notice: "Reservation confirmed successfully" and return
     end
     redirect_to '/manage_reservations',alert: 'Error when confirming loan...' and return
   end
@@ -52,7 +52,7 @@ class ReservationsController < ApplicationController
       reservation.isReturned=true
       reservation.returned_date=DateTime.now
       reservation.save
-      redirect_to '/manage_reservations' and return
+      redirect_to '/manage_reservations', notice: "Returned registered successfully" and return
     end
     redirect_to '/manage_reservations',alert: 'Error when confirming return...' and return
   end
@@ -79,7 +79,7 @@ class ReservationsController < ApplicationController
       reservation.postpone_counter+=1
       reservation.expiration_date += 1.month
       reservation.save
-      redirect_to '/manage_reservations' and return
+      redirect_to '/manage_reservations',notice: "Reservation postponed successfully" and return
     end
     redirect_to '/manage_reservations',alert: 'Error when postponing return...' and return
   end
