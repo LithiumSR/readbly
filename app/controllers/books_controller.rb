@@ -111,13 +111,13 @@ class BooksController < ApplicationController
       @book.isDisabled=true
       @book.save
       respond_to do |format|
-        format.html { redirect_to books_url, notice: 'Book was successfully disabled.' }
+        format.html { redirect_to @book, notice: 'Book was successfully disabled.' }
         format.json { head :no_content }
       end
       return
     end
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was already disabled.' }
+      format.html { redirect_to @book, notice: 'Book was already disabled.' }
       format.json { head :no_content }
     end
   end
@@ -128,13 +128,13 @@ class BooksController < ApplicationController
       @book.isDisabled=false
       @book.save
       respond_to do |format|
-        format.html { redirect_to books_url, notice: 'Book was successfully enabled.' }
+        format.html { redirect_to @book, notice: 'Book was successfully enabled.' }
         format.json { head :no_content }
       end
       return
     end
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was already enabled.' }
+      format.html { redirect_to @book, notice: 'Book was already enabled.' }
       format.json { head :no_content }
     end
   end
