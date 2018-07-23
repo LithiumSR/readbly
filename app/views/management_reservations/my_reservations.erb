@@ -124,7 +124,7 @@
               </td>
             <% end %>
             <td>
-              <%= reservation.isPostponed %>
+              <%= reservation.isPostponed.to_s.capitalize %>
             </td>
             <% if (reservation.expiration_date - DateTime.now).to_i <=7 %>
             <td>
